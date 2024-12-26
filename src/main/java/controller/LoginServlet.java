@@ -18,6 +18,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setAttribute("loginId", "");
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp")
 				.forward(request, response);
 	}
@@ -32,15 +33,15 @@ public class LoginServlet extends HttpServlet {
 			Admin admin = adminDao.findByLoginIdAndPass(loginId, loginPass);
 
 			if (admin != null) {
-				request.getSession().setAttribute("loginId", admin.getLoginId());
-				response.sendRedirect("login");
+				request.getSession().setAttribute("login_Id", admin.getLoginId());
+				response.sendRedirect("top");
+			//ログイン失敗
 			} else {
 				request.setAttribute("loginId", loginId);
 				request.setAttribute("errorMsg", true);
 				request.getRequestDispatcher("/WEB-INF/view/login.jsp")
 						.forward(request, response);
 			}
-			
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
