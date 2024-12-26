@@ -18,17 +18,17 @@
 			alt="logo" width="200" style="display: block; margin: auto;"> <br>
 
 		<!-- アラートメッセージ -->
-		<c:if test="${not empty errorMessage}">
+		<c:if test="${not empty errorMsg}">
 			<div class="alert alert-danger" role="alert">
 				ログインに失敗しました。<br>IDまたはパスワードを確認してください。
 			</div>
 		</c:if>
 		<!-- アラートメッセージ -->
 
-		<form action="/login" method="POST">
+		<form action="" method="POST">
 			<div class="form-group">
 				<label for="login_id">ログインID</label> 
-				<input class="form-control" type="text" name="loginId"aria-label="default input example" required>
+				<input class="form-control" type="text" name="loginId"aria-label="default input example" value="<c:out value="${loginId}" />" required>
 			</div>
 			<div class="form-group">
 				<label for="password">パスワード</label>
