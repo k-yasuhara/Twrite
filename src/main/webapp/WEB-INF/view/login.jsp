@@ -28,11 +28,11 @@
 		<form action="/login" method="POST">
 			<div class="form-group">
 				<label for="login_id">ログインID</label> 
-				<input class="form-control" type="text" name="login_id"aria-label="default input example" required>
+				<input class="form-control" type="text" name="loginId"aria-label="default input example" required>
 			</div>
 			<div class="form-group">
 				<label for="password">パスワード</label>
-				<input class="form-control" type="password" name="password" aria-label="default input example" required>
+				<input class="form-control" type="password" name="loginPass" aria-label="default input example" required>
 			</div>
 			<button type="submit" class="login-btn">ログイン</button>
 		</form>
