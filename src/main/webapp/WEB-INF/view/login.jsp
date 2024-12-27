@@ -14,15 +14,15 @@
 </head>
 <body>
 	<div class="login-container">
-		<img src="<%=request.getContextPath()%>/images/Twriteロゴ.png"
+		<img src="<%=request.getContextPath()%>/images/Twritelogo.png"
 			alt="logo" width="200" style="display: block; margin: auto;"> <br>
 
 		<!-- アラートメッセージ -->
 		<c:if test="${not empty errorMsg}">
 			<div class="alert alert-danger" role="alert">
-				ログインに失敗しました。<br>IDまたはパスワードを確認してください。
+					ログインに失敗しました。<br>IDまたはパスワードを確認してください。
 			</div>
-		</c:if>
+		</c:if>		
 		<!-- アラートメッセージ -->
 
 		<form action="" method="POST">
