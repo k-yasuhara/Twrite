@@ -48,3 +48,9 @@
         .numberOfConsultations {
             font-family: Verdana, Geneva, Tahoma, sans-serif ;
         }
+
+        select[readonly],
+        input[type="radio"][readonly],
+        input[type="checkbox"][readonly]{
+            pointer-events:none;
+        }
