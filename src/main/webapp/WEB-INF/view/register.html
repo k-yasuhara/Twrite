@@ -92,21 +92,34 @@
                 <!-- topic -->
                 <h1 class="h2 fw-bold">◆新規入力</h1>
 
-                <form>
+
+                <form method="post">
                     <!-- 相談開始時間 -->
-                    <div class="row mb-3">
-                      <label for="start_at" class="col-sm-2 col-form-label ms-3">相談開始時間</label>
-                      <p class="col-sm-1 col-form-label" style="color: red;">(必須)</p>
-                      <div class="col-sm-auto">
-                          <input type="date" class="form-control" id="start_at" name="start_at">
-                        </div>
+                    <div class="row my-3">
+                    <!-- label枠 -->
+                    <div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+                     <div class="row">
+                       <label for="start_at" class="col col-form-label ms-3 fw-bold">相談開始時間</label>
+                       <p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
+                     </div>
+                    </div>
+                    <!-- end of label枠 -->
+                      <div class="col-sm-auto ms-3 py-2">
+                        <input type="datetime-local" class="form-control" id="start_at" name="start_at">
+                      </div>
                     </div>
                     <!-- end of 相談開始時間  -->
                     <!-- スタッフ名 -->
                     <div class="row mb-3">
-                        <label for="staff_id" class="col-sm-2 col-form-label ms-3">スタッフ名</label>
-                        <p class="col-sm-1 col-form-label" style="color: red;">(必須)</p>
-                      <div class="col-sm-auto">
+                    <!-- label枠 -->
+                    <div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+                        <div class="row">
+                          <label for="starff_id" class="col col-form-label ms-3 fw-bold">スタッフ名</label>
+                          <p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
+                        </div>
+                    </div>
+                    <!-- end of label枠 -->
+                      <div class="col-sm-auto ms-3 py-2">
                         <select class="form-select" name="staff_id" id="staff_id">
                             <option value="1">渡邊</option>
                             <option value="2">高比良</option>
@@ -117,9 +130,15 @@
                     <!-- end of スタッフ名 -->
                     <!-- 急病者続柄 -->
                     <div class="row mb-3">
-                        <label for="patient_pattern" class="col-sm-2 col-form-label ms-3">急病者 続柄</label>
-                        <p class="col-sm-1 col-form-label" style="color: red;">(必須)</p>
-                      <div class="col-sm-auto">
+                    <!-- label枠 -->
+                    <div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+                        <div class="row">
+                          <label for="patient_pattern" class="col col-form-label ms-3 fw-bold">急病者 側柄</label>
+                          <p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
+                        </div>
+                    </div>
+                    <!-- end of label枠 -->
+                    <div class="col-sm-auto ms-3 py-2">
                         <select class="form-select" name="patient_pattern" id="patient_pattern">
                             <option value="1">本人</option>
                             <option value="2">娘</option>
@@ -129,92 +148,111 @@
                             <option value="6">親戚</option>
                             <option value="7">その他</option>
                         </select>
-                      </div>
+                    </div>
                     </div>
                     <!-- end of 急病者続柄 -->
                     <!-- 症状種別 -->
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label ms-3">症状種別</label>
-                        <p class="col-sm-1 col-form-label" style="color: red;">(必須)</p>
-                      <div class="col-sm-auto mt-1">
-                        <div class="form-check">
+                    <!-- label枠 -->
+                    <div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+                        <div class="row">
+                          <label class="col col-form-label ms-3 fw-bold">症状種別</label>
+                          <p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
+                        </div>
+                    </div>
+                    <!-- end of label枠 -->
+                    <div class="col-sm-auto ms-3 py-2">
+                        <div class="form-check mb-2">
                             <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
                             <label class="form-check-label" >熱発</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="2" name="symptoms" >
                             <label class="form-check-label" >咳嗽</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="3" name="symptoms" >
                             <label class="form-check-label" >鼻汁・鼻閉</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="4" name="symptoms" >
                             <label class="form-check-label" >咽頭痛</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
-                            <label class="form-check-label" for="熱発">咽頭違和感</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="5" name="symptoms" >
+                            <label class="form-check-label" >咽頭違和感</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="6" name="symptoms" >
                             <label class="form-check-label" >腹痛</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="7" name="symptoms" >
                             <label class="form-check-label" >下痢</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="8" name="symptoms" >
                             <label class="form-check-label" >嘔気・嘔吐</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms" >
-                            <label class="form-check-label">熱傷/label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="9" name="symptoms" >
+                            <label class="form-check-label">熱傷</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" name="symptoms">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="10" name="symptoms" >
                             <label class="form-check-label">打撲</label>
                         </div>
-                      </div>
+                    </div>
                     </div>
                     <!-- end of 症状種別 -->
-                    <fieldset class="row mb-3">
-                      <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            First radio
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            Second radio
-                          </label>
-                        </div>
-                        <div class="form-check disabled">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                          <label class="form-check-label" for="gridRadios3">
-                            Third disabled radio
-                          </label>
-                        </div>
-                      </div>
-                    </fieldset>
+                    <!-- 相談内容 -->
                     <div class="row mb-3">
-                      <div class="col-sm-10 offset-sm-2">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck1">
-                          <label class="form-check-label" for="gridCheck1">
-                            Example checkbox
-                          </label>
+                    <!-- label枠 -->
+                    <div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+                        <div class="row">
+                          <label for="consolutation" class="col col-form-label ms-3 fw-bold">相談内容</label>
+                          <p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
                         </div>
+                    </div>
+                    <!-- end of label枠 -->
+                      <div class="ms-3 py-2" style="width: 500px;">
+                        <textarea class="form-control" name="consolutation" id="consolutation" rows="3"></textarea>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                  </form>
+                    <!-- end of 相談内容 -->
+                    <!-- 対応内容 -->
+                    <div class="row mb-3">
+                    <!-- label枠 -->
+                    <div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+                        <div class="row">
+                          <label for="response" class="col col-form-label ms-3 fw-bold">対応内容</label>
+                          <p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
+                        </div>
+                    </div>
+                    <!-- end of label枠 -->
+                      <div class="ms-3 py-2" style="width: 500px;">
+                        <textarea class="form-control" name="response" id="response" rows="3"></textarea>
+                      </div>
+                    </div>
+                    <!-- end of 対応内容 -->
+                    <!-- 相談終了時間 -->
+                    <div class="row mb-3">
+                    <!-- label枠 -->
+                    <div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+                        <div class="row">
+                          <label for="end_at" class="col col-form-label ms-3 fw-bold">相談終了時間</label>
+                          <p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
+                        </div>
+                    </div>
+                    <!-- end of label枠 -->
+                        <div class="col-sm-auto ms-3 py-2">
+                            <input type="datetime-local" class="form-control" id="end_at" name="end_at">
+                        </div>
+                    </div>
+                    <!-- end of 相談終了時間  -->
+                    <button type="submit" class="btn btn-primary mb-3">確定</button>
+                </form>
+
             </main>
             <!-- main -->
         </div>
@@ -223,6 +261,5 @@
         <p>&copy; 2024 Twrite. All rights reserved.</p>
     </footer>
     <script src="/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
