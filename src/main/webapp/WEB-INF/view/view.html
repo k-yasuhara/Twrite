@@ -256,8 +256,35 @@
                         </div>
                     </div>
                     <!-- end of 相談終了時間  -->
-                    <button type="submit" class="btn btn-warning mb-3" formaction="/edit">編集</button>
-                    <button type="button" class="btn btn-secondary ms-3 mb-3" onclick="history.back()">戻る</button>
+                    <button type="button" class="btn btn-secondary ms-1 mb-3" onclick="history.back()">戻る</button>
+                    <button type="submit" class="btn btn-warning ms-3 mb-3" formaction="/edit">編集</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success ms-3 mb-3" data-bs-toggle="modal" data-bs-target="#permitModal">
+                        承認
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="permitModal" tabindex="-1" aria-labelledby="permitModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="permitModalLabel">承認作業</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            記録を承認しますか？
+                            </div>
+                            <div class="modal-footer">
+                            <a href="/remand">
+                                <button type="button" class="btn btn-secondary" >差し戻し</button>
+                            </a>
+                            <a href="/permit">
+                                <button type="button" class="btn btn-primary">承認</button>
+                            </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </form>
 
             </main>
