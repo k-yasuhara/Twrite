@@ -7,7 +7,12 @@ import javax.sql.DataSource;
 public class DaoFactory {
 	public static AdminDao createAdminDao() {
 		return new AdminDaoImpl(getDatasorce());
-		
+
+	}
+
+	public static RecordDao createRecordDao() {
+		return new RecordDaoImpl(getDatasorce());
+
 	}
 
 	private static DataSource getDatasorce() {
@@ -17,7 +22,7 @@ public class DaoFactory {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/twrite_db");
 		} catch (NamingException e) {
-			if(ctx != null) {
+			if (ctx != null) {
 				try {
 					ctx.close();
 				} catch (NamingException e1) {
