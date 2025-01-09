@@ -100,6 +100,8 @@
 
 
 				<form method="post">
+
+
 					<!-- 相談開始時間 -->
 					<div class="row my-3">
 						<!-- label枠 -->
@@ -112,10 +114,11 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="start_at"
-								name="start_at">
+								name="start_at" required>
 						</div>
 					</div>
 					<!-- end of 相談開始時間  -->
+
 					<!-- スタッフ名 -->
 					<div class="row mb-3">
 						<!-- label枠 -->
@@ -127,7 +130,9 @@
 						</div>
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
-							<select class="form-select" name="staff_id" id="staff_id">
+							<select class="form-select" name="staff_id" id="staff_id"
+								required>
+								<option selected disabled value="">選択してください</option>
 								<option value="1">渡邊</option>
 								<option value="2">高比良</option>
 								<option value="3">松井</option>
@@ -135,6 +140,7 @@
 						</div>
 					</div>
 					<!-- end of スタッフ名 -->
+
 					<!-- 急病者続柄 -->
 					<div class="row mb-3">
 						<!-- label枠 -->
@@ -148,7 +154,8 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="patient_pattern"
-								id="patient_pattern">
+								id="patient_pattern" required>
+								<option selected disabled value="">選択してください</option>
 								<option value="1">本人</option>
 								<option value="2">娘</option>
 								<option value="3">息子</option>
@@ -160,13 +167,13 @@
 						</div>
 					</div>
 					<!-- end of 急病者続柄 -->
+
 					<!-- 症状種別 -->
 					<div class="row mb-3">
 						<!-- label枠 -->
 						<div class="col-sm-2 ms-3 py-2 bg-body-secondary">
 							<div class="row">
 								<label class="col col-form-label ms-3 fw-bold">症状種別</label>
-								<p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
 							</div>
 						</div>
 						<!-- end of label枠 -->
@@ -214,6 +221,7 @@
 						</div>
 					</div>
 					<!-- end of 症状種別 -->
+
 					<!-- 相談内容 -->
 					<div class="row mb-3">
 						<!-- label枠 -->
@@ -221,23 +229,22 @@
 							<div class="row">
 								<label for="consultation"
 									class="col col-form-label ms-3 fw-bold">相談内容</label>
-								<p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
 							</div>
 						</div>
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="consultation"
-								id="consultation" rows="3"></textarea>
+								id="consultation" rows="3" ></textarea>
 						</div>
 					</div>
 					<!-- end of 相談内容 -->
+
 					<!-- 対応内容 -->
 					<div class="row mb-3">
 						<!-- label枠 -->
 						<div class="col-sm-2 ms-3 py-2 bg-body-secondary">
 							<div class="row">
 								<label for="response" class="col col-form-label ms-3 fw-bold">対応内容</label>
-								<p class="col-form-label ms-3" style="color: red; width: 150px;">(必須)</p>
 							</div>
 						</div>
 						<!-- end of label枠 -->
@@ -247,6 +254,7 @@
 						</div>
 					</div>
 					<!-- end of 対応内容 -->
+
 					<!-- 相談終了時間 -->
 					<div class="row mb-3">
 						<!-- label枠 -->
@@ -259,10 +267,11 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="end_at"
-								name="end_at">
+								name="end_at" required>
 						</div>
 					</div>
 					<!-- end of 相談終了時間  -->
+
 					<button type="submit" class="btn btn-primary ms-1 mb-3">確定</button>
 				</form>
 

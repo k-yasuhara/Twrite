@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,24 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RecordDaoImpl implements RecordDao {
 	private DataSource ds;
+
+	@Override
+	public List<RecordDB> findAll() throws Exception {
+		List<RecordDB> recordList = new ArrayList<>();
+
+		try (var con = ds.getConnection();) {
+			String sql = "select * from records";
+			var stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				recordList.add(mapToRecord(rs));
+
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return recordList;
+	}
 
 	private RecordDB mapToRecord(ResultSet rs) throws Exception {
 
@@ -34,37 +54,33 @@ public class RecordDaoImpl implements RecordDao {
 	}
 
 	@Override
-	public List<RecordDB> findAll() throws Exception {
-		List<RecordDB> recordList = new ArrayList<RecordDB>();
+	public void insert(RecordDB record) throws Exception {
 
 		try (var con = ds.getConnection();) {
-			String sql = "select * from records";
+			String sql = insertSQL();
 			var stmt = con.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				recordList.add(mapToRecord(rs));
 
-			}
+			stmt.setString(1, record.getRegisterId());
+			stmt.setTimestamp(2, new Timestamp(record.getStart().getTime()));
+			stmt.setTimestamp(3, new Timestamp(record.getEnd().getTime()));
+			stmt.setObject(4, record.getPatientPattern(), Types.INTEGER);
+			stmt.setString(5, record.getConsContent());
+			stmt.setString(6, record.getRespContent());
+			stmt.setObject(7, record.getStaffId(), Types.INTEGER);
+
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
 		}
-		return recordList;
+
 	}
 
-	@Override
-	public void insert(RecordDB record) throws Exception {
-		List<RecordDB> recordList = new ArrayList<RecordDB>();
-
-		try (var con = ds.getConnection();) {
-			String sql = "select * from records";
-			var stmt = con.prepareStatement(sql);
-		
-			stmt.executeUpdate();
-		
-		} catch (Exception e) {
-			throw e;
-		}
-
+	private String insertSQL() {
+		String sql = "insert into records "
+				+ "(register_id, registered_at, updated_at, start_at, end_at, patient_pattern, consultation, response, editor, staff_id) "
+				+ "values "
+				+ "(?, now(), now(), ?,?,?,?,?,0,?)";
+		return sql;
 	}
 
 }
