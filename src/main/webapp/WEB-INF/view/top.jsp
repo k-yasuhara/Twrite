@@ -176,7 +176,7 @@
 	<footer>
 		<p>&copy; 2024 Twrite. All rights reserved.</p>
 	</footer>
-	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="<%= request.getContextPath() %>/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

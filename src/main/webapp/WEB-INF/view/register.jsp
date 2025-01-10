@@ -7,12 +7,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twrite 新規入力画面</title>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css"
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/top.style.css">
 <script
-	src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<!-- ヘッダー 常に上部固定 -->
@@ -98,10 +101,7 @@
 				<!-- topic -->
 				<h1 class="h2 fw-bold">◆新規入力</h1>
 
-
 				<form method="post">
-
-
 					<!-- 相談開始時間 -->
 					<div class="row my-3">
 						<!-- label枠 -->
@@ -173,50 +173,60 @@
 						<!-- label枠 -->
 						<div class="col-sm-2 ms-3 py-2 bg-body-secondary">
 							<div class="row">
-								<label class="col col-form-label ms-3 fw-bold">症状種別</label>
+								<label class="col-form-label ms-3 fw-bold">症状種別</label>
 							</div>
 						</div>
 						<!-- end of label枠 -->
-						<div class="col-sm-auto ms-3 py-2">
+						<div class="col-sm-auto form-check ms-3 py-2">
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="1"
-									name="symptoms"> <label class="form-check-label">熱発</label>
+									name="symptoms" id="fever"> <label for="fever"
+									class="form-check-label">熱発</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="2"
-									name="symptoms"> <label class="form-check-label">咳嗽</label>
+									name="symptoms" id="cough"> <label for="cough"
+									class="form-check-label">咳嗽</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="3"
-									name="symptoms"> <label class="form-check-label">鼻汁・鼻閉</label>
+									name="symptoms" id="stuffy_nose"> <label
+									for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="4"
-									name="symptoms"> <label class="form-check-label">咽頭痛</label>
+									name="symptoms" id="sore_throat"> <label
+									for="sore_throat" class="form-check-label">咽頭痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="5"
-									name="symptoms"> <label class="form-check-label">咽頭違和感</label>
+									name="symptoms" id="throat_discomform"> <label
+									for="throat_discomform" class="form-check-label">咽頭違和感</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="6"
-									name="symptoms"> <label class="form-check-label">腹痛</label>
+									name="symptoms" id="stomachache"> <label
+									for="stomachache" class="form-check-label">腹痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="7"
-									name="symptoms"> <label class="form-check-label">下痢</label>
+									name="symptoms" id="diarrhea"> <label for="diarrhea"
+									class="form-check-label">下痢</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="8"
-									name="symptoms"> <label class="form-check-label">嘔気・嘔吐</label>
+									name="symptoms" id="nausea_vomiting"> <label
+									for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="9"
-									name="symptoms"> <label class="form-check-label">熱傷</label>
+									name="symptoms" id="burn"> <label for="burn"
+									class="form-check-label">熱傷</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="10"
-									name="symptoms"> <label class="form-check-label">打撲</label>
+									name="symptoms" id="bruise"> <label for="bruise"
+									class="form-check-label">打撲</label>
 							</div>
 						</div>
 					</div>
@@ -234,7 +244,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="consultation"
-								id="consultation" rows="3" ></textarea>
+								id="consultation" rows="3"></textarea>
 						</div>
 					</div>
 					<!-- end of 相談内容 -->
@@ -281,7 +291,8 @@
 	</div>
 	<footer>
 		<p>&copy; 2024 Twrite. All rights reserved.</p>
+
 	</footer>
-	<script src="/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
