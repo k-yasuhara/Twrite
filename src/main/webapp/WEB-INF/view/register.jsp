@@ -7,15 +7,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twrite 新規入力画面</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet" />
-<link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css"
-	rel="stylesheet" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/top.style.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<!-- ヘッダー 常に上部固定 -->
@@ -96,8 +91,14 @@
 				</div>
 			</nav>
 			<!-- End of サイドバー -->
+
 			<!-- main -->
 			<main class="col-10 col-sm px-4 py-4">
+				<c:if test="${not empty errorMsg}">
+					<div class="alert alert-danger" role="alert">
+						<c:out value="${errorMsg}" />
+					</div>
+				</c:if>
 				<!-- topic -->
 				<h1 class="h2 fw-bold">◆新規入力</h1>
 
@@ -114,7 +115,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="start_at"
-								name="start_at" required>
+								name="start_at" value="${start}" required>
 						</div>
 					</div>
 					<!-- end of 相談開始時間  -->
@@ -132,11 +133,37 @@
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="staff_id" id="staff_id"
 								required>
-								<option selected disabled value="">選択してください</option>
-								<option value="1">渡邊</option>
-								<option value="2">高比良</option>
-								<option value="3">松井</option>
+								<c:if test="${empty staff}">
+									<option selected disabled>選択してください</option>
+								</c:if>
+								<option id="staff1" value="1">渡邊</option>
+								<option id="staff2" value="2">高比良</option>
+								<option id="staff3" value="3">松井</option>
 							</select>
+							<c:if test="${not empty staff}">
+								<c:choose>
+									<c:when test="${staff == 1}">
+										<script>
+											const element = document.getElementById("staff1");
+											element.toggle('selected')
+										</script>
+									</c:when>
+									<c:when test="${staff == 2}">
+										<script>
+											const element = document.getElementById("staff2");
+											element.toggle('selected')
+										</script>
+									</c:when>
+									<c:when test="${staff == 3}">
+										<script>
+											const element = document.getElementById("staff3");
+											element.toggle('selected')
+										</script>
+									</c:when>
+									<c:otherwise></c:otherwise>
+								</c:choose>
+								
+							</c:if>
 						</div>
 					</div>
 					<!-- end of スタッフ名 -->
@@ -155,7 +182,10 @@
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="patient_pattern"
 								id="patient_pattern" required>
-								<option selected disabled value="">選択してください</option>
+								<c:if test="${empty patient}">
+									<option selected disabled>選択してください</option>
+								</c:if>
+
 								<option value="1">本人</option>
 								<option value="2">娘</option>
 								<option value="3">息子</option>
@@ -244,7 +274,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="consultation"
-								id="consultation" rows="3"></textarea>
+								id="consultation" rows="3" value="${consContent}"></textarea>
 						</div>
 					</div>
 					<!-- end of 相談内容 -->
@@ -260,7 +290,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="response" id="response"
-								rows="3"></textarea>
+								rows="3" value="${respContent}"></textarea>
 						</div>
 					</div>
 					<!-- end of 対応内容 -->
@@ -277,7 +307,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="end_at"
-								name="end_at" required>
+								name="end_at" value="${end}" required>
 						</div>
 					</div>
 					<!-- end of 相談終了時間  -->
@@ -291,8 +321,7 @@
 	</div>
 	<footer>
 		<p>&copy; 2024 Twrite. All rights reserved.</p>
-
 	</footer>
-
+	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
