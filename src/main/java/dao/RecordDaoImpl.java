@@ -60,13 +60,13 @@ public class RecordDaoImpl implements RecordDao {
 			String sql = insertSQL();
 			var stmt = con.prepareStatement(sql);
 
-			stmt.setString(1, record.getRegisterId());
-			stmt.setTimestamp(2, new Timestamp(record.getStart().getTime()));
-			stmt.setTimestamp(3, new Timestamp(record.getEnd().getTime()));
-			stmt.setObject(4, record.getPatientPattern(), Types.INTEGER);
-			stmt.setString(5, record.getConsContent());
-			stmt.setString(6, record.getRespContent());
-			stmt.setObject(7, record.getStaffId(), Types.INTEGER);
+			stmt.setTimestamp(1, new Timestamp(record.getStart().getTime()));
+			stmt.setTimestamp(2, new Timestamp(record.getEnd().getTime()));
+			stmt.setObject(3, record.getPatientPattern(), Types.INTEGER);
+			stmt.setString(4, record.getConsContent());
+			stmt.setString(5, record.getRespContent());
+			stmt.setObject(6, record.getStaffId(), Types.INTEGER);
+			stmt.setString(7, record.getRegisterId());
 
 			stmt.executeUpdate();
 		} catch (Exception e) {
@@ -76,10 +76,12 @@ public class RecordDaoImpl implements RecordDao {
 	}
 
 	private String insertSQL() {
-		String sql = "insert into records "
-				+ "(register_id, registered_at, updated_at, start_at, end_at, patient_pattern, consultation, response, editor, staff_id) "
-				+ "values "
-				+ "(?, now(), now(), ?,?,?,?,?,0,?)";
+		String sql = "insert into records"
+				+ "(register_id, registered_at, updated_at, start_at, end_at, patient_pattern, consultation, response, editor, staff_id)"
+				+ "select admins.id ,now(),now(),?,?,?,?,?,0,? "
+				+ "from admins "
+				+ "where admins.login_id = ?";
+
 		return sql;
 	}
 
