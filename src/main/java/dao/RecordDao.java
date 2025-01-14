@@ -9,5 +9,5 @@ public interface RecordDao {
 	List<RecordDB> findAll() throws Exception;
 	
 	// レコードを登録
-	void insert(RecordDB record) throws Exception;
+	Integer  insert(RecordDB record) throws Exception;
 }

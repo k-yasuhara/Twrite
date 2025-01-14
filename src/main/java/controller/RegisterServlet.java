@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.RecordDao;
+import dao.SymptomDao;
 import dto.RecordDB;
+import dto.Symptom;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -27,7 +29,8 @@ public class RegisterServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//入力値の取得
+
+		//DB:records用の入力値の取得
 		String registerId = (String) request.getSession().getAttribute("loginId");
 		String strStart = request.getParameter("start_at");
 		strStart = strStart.replace("T", " ");
@@ -37,6 +40,7 @@ public class RegisterServlet extends HttpServlet {
 		String consContent = request.getParameter("consultation");
 		String respContent = request.getParameter("response");
 		Integer staffId = Integer.parseInt(request.getParameter("staff_id"));
+
 		//バリデーション
 		boolean isValid = true;
 
@@ -75,9 +79,27 @@ public class RegisterServlet extends HttpServlet {
 			RecordDB record = new RecordDB(null, registerId, null, null, startAt, endAt, patientPattern, consContent,
 					respContent, null, staffId);
 
-			//DBにデータ追加
+			//DBにデータ追加と自動採番IDを格納
 			RecordDao recordDao = DaoFactory.createRecordDao();
-			recordDao.insert(record);
+			Integer recordsId = recordDao.insert(record);
+
+			//symptomsへのinsert
+			//DB:symptoms用の入力値の取得
+			//チェックボックスの入力を配列に格納
+
+			String[] strSymptomList = request.getParameterValues("symptoms");
+
+			//入力ありの場合
+			if (strSymptomList != null && strSymptomList.length != 0) {
+				Symptom symptom = new Symptom();
+				symptom.setRecodsId(recordsId);
+				//挿入したrecordsのIDを取得
+				SymptomDao symptomDao = DaoFactory.creatSymptomDao();
+				symptomDao.insert(symptom, strSymptomList);
+
+			}
+
+			//topにリダイレクト
 			response.sendRedirect("top");
 
 		} catch (Exception e) {

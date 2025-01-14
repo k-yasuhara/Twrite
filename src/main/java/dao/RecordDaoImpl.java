@@ -26,7 +26,6 @@ public class RecordDaoImpl implements RecordDao {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				recordList.add(mapToRecord(rs));
-
 			}
 		} catch (Exception e) {
 			throw e;
@@ -54,11 +53,12 @@ public class RecordDaoImpl implements RecordDao {
 	}
 
 	@Override
-	public void insert(RecordDB record) throws Exception {
+	public Integer insert(RecordDB record) throws Exception {
+		Integer recordsId = null;
 
 		try (var con = ds.getConnection();) {
 			String sql = insertSQL();
-			var stmt = con.prepareStatement(sql);
+			var stmt = con.prepareStatement(sql,java.sql.Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setTimestamp(1, new Timestamp(record.getStart().getTime()));
 			stmt.setTimestamp(2, new Timestamp(record.getEnd().getTime()));
@@ -67,11 +67,17 @@ public class RecordDaoImpl implements RecordDao {
 			stmt.setString(5, record.getRespContent());
 			stmt.setObject(6, record.getStaffId(), Types.INTEGER);
 			stmt.setString(7, record.getRegisterId());
-
 			stmt.executeUpdate();
+
+			//自動採番された管理番号を戻り値に格納
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				recordsId = generatedKeys.getInt(1);
+			}
 		} catch (Exception e) {
 			throw e;
 		}
+		return recordsId;
 
 	}
 

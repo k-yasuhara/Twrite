@@ -15,6 +15,11 @@ public class DaoFactory {
 
 	}
 
+	public static SymptomDaoImpl creatSymptomDao() {
+		return new SymptomDaoImpl(getDatasorce());
+
+	}
+
 	private static DataSource getDatasorce() {
 		InitialContext ctx = null;
 		DataSource ds = null;
