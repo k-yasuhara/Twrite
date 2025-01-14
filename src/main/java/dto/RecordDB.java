@@ -21,4 +21,8 @@ public class RecordDB {
 	private String respContent;
 	private Integer editror;
 	private Integer staffId;
+	private String symptoms;
+	private Staff staff;
+	private Patient patient;
+	
 }

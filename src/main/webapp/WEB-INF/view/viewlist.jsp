@@ -1,12 +1,14 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twrite 一覧画面</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/top.style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/top.style.css">
 </head>
 <body>
     <!-- ヘッダー 常に上部固定 -->
@@ -14,7 +16,7 @@
         <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary border">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
-                    <img src="/images/Twriteshortlogo_transparent.png" alt="Logo" width="22" height="24" class="d-inline-block align-text-top">
+                    <img src="<%= request.getContextPath() %>/images/Twriteshortlogo_transparent.png" alt="Logo" width="22" height="24" class="d-inline-block align-text-top">
                     〇〇救急相談センター
                 </a>
                 <ul class="nav justify-content-end">
@@ -22,7 +24,7 @@
                         <a class="nav-link disabled">※救急相談OP01※</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/logout">ログアウト</a>
+                        <a class="nav-link active" aria-current="page" href="logout">ログアウト</a>
                     </li>
                 </ul>
             </div>
@@ -37,13 +39,13 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column py-2">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/top">
+                            <a class="nav-link active" aria-current="page" href="top">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 <span class="ms-2">ダッシュボード</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">
+                            <a class="nav-link" href="register">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -52,7 +54,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="viewlist">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
                             </svg>
@@ -106,6 +108,8 @@
                         <th scope="col" style="max-width: 250px;">対応内容</th>
                       </tr>
                     </thead>
+                    <c:forEach items="${recordList}" >
+                    
                     <tbody>
                       <tr>
                         <th scope="row">
@@ -123,16 +127,17 @@
                                 </a></td>
                             </table>
                         </th>
-                        <th >1</th>
-                        <td>2024年01月01日 01時01分</td>
-                        <td>2024年01月01日 01時10分</td>
-                        <td>渡邊</td>
-                        <td>本人</td>
-                        <td>熱発</td>
-                        <td>hoge</td>
-                        <td>hoge</td>
+                        <th ><c:out value="${recordList.id}" /></th>
+                        <td><c:out value="${recordList.start}" /></td>
+                        <td><c:out value="${recordList.end}" /></td>
+                        <td><c:out value="${recordList.staff.name}" /></td>
+                        <td><c:out value="${recordList.patient.attribute}" /></td>
+                        <td><c:out value="${recordList.symptoms}"/></td>
+                        <td><c:out value="${recordList.consContent}"/></td>
+                        <td><c:out value="${recordList.respContent}"/></td>
                       </tr>
                     </tbody>
+                    </c:forEach>
                 </table>
 
             </main>
@@ -142,7 +147,7 @@
     <footer>
         <p>&copy; 2024 Twrite. All rights reserved.</p>
     </footer>
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

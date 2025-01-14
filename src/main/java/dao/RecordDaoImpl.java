@@ -9,7 +9,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import dto.Patient;
 import dto.RecordDB;
+import dto.Staff;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class RecordDaoImpl implements RecordDao {
 		List<RecordDB> recordList = new ArrayList<>();
 
 		try (var con = ds.getConnection();) {
-			String sql = "select * from records";
+			String sql = findAllSQL();
 			var stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -33,23 +35,45 @@ public class RecordDaoImpl implements RecordDao {
 		return recordList;
 	}
 
+	private String findAllSQL() {
+		String sql = "select "
+				+ "	r.id,"
+				+ "	r.register_id,"
+				+ "	r.start_at,"
+				+ " r.end_at,"
+				+ " s.name,"
+				+ " p.attribute,"
+				+ " r.consultation,"
+				+ " r.response,"
+				+ " group_concat(symptoms_pattern.symptoms_name separator \",\") as \"symptoms\" "
+				+ " from records as r "
+				+ " join staff as s on r.staff_id = s.id "
+				+ "	join patient as p on r.patient_pattern = p.id "
+				+ " join symptoms on r.id = symptoms.records_id "
+				+ " join symptoms_pattern on symptoms.symptoms_id = symptoms_pattern.id "
+				+ " group by r.id;";
+		return sql;
+	}
+
 	private RecordDB mapToRecord(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("id");
-		String registerId = rs.getString("register_id");
-		Date registered = rs.getTimestamp("registered_at");
-		Date updated = rs.getTimestamp("updated_at");
-		Date start = rs.getTimestamp("start_at");
-		Date end = rs.getTimestamp("end_at");
-		Integer patientPattern = (Integer) rs.getObject("patient_pattern");
-		String consContent = rs.getString("consultation");
-		String respContent = rs.getString("response");
-		Integer editor = (Integer) rs.getObject("editor");
-		Integer staffId = (Integer) rs.getObject("staff_id");
-
-		return new RecordDB(id, registerId, registered,
-				updated, start, end, patientPattern,
-				consContent, respContent, editor, staffId);
+		Integer id = (Integer) rs.getObject("r.id");
+		String registerId = rs.getString("r.register_id");
+		Date start = rs.getTimestamp("r.start_at");
+		Date end = rs.getTimestamp("r.end_at");
+		String consContent = rs.getString("r.consultation");
+		String respContent = rs.getString("r.response");
+		String symptoms = rs.getString("symptoms");
+		
+		String sName = rs.getString("s.name");
+		Staff staff = new Staff(null, sName);
+				
+		String pAttribute = rs.getString("p.attribute");
+		Patient patient = new Patient(id, pAttribute);
+		
+		RecordDB record = new RecordDB(id, registerId, null, end, start, null, null, consContent, respContent, null, null, symptoms, staff, patient);
+		
+		return record;
 	}
 
 	@Override
@@ -58,7 +82,7 @@ public class RecordDaoImpl implements RecordDao {
 
 		try (var con = ds.getConnection();) {
 			String sql = insertSQL();
-			var stmt = con.prepareStatement(sql,java.sql.Statement.RETURN_GENERATED_KEYS);
+			var stmt = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setTimestamp(1, new Timestamp(record.getStart().getTime()));
 			stmt.setTimestamp(2, new Timestamp(record.getEnd().getTime()));
