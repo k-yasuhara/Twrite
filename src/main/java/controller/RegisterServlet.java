@@ -58,14 +58,12 @@ public class RegisterServlet extends HttpServlet {
 		try {
 			//バリデーションNG、フォワード
 			if (!isValid) {
-//				System.out.println(staffId);
-//				System.out.println(patientPattern);
 				request.setAttribute("start", strStart);
 				request.setAttribute("end", strEnd);
-				request.setAttribute("patient", patientPattern);
+				request.setAttribute("patientPattern", patientPattern);
 				request.setAttribute("consContent", consContent);
 				request.setAttribute("respContent", respContent);
-				request.setAttribute("staff", staffId);
+				request.setAttribute("staffId", staffId);
 
 				request.getRequestDispatcher("/WEB-INF/view/register.jsp")
 						.forward(request, response);

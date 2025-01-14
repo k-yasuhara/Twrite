@@ -133,37 +133,24 @@
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="staff_id" id="staff_id"
 								required>
-								<c:if test="${empty staff}">
+								<c:if test="${empty staffId}">
 									<option selected disabled>選択してください</option>
 								</c:if>
-								<option id="staff1" value="1">渡邊</option>
-								<option id="staff2" value="2">高比良</option>
-								<option id="staff3" value="3">松井</option>
+								<option value="1">渡邊</option>
+								<option value="2">高比良</option>
+								<option value="3">松井</option>
 							</select>
-							<c:if test="${not empty staff}">
-								<c:choose>
-									<c:when test="${staff == 1}">
-										<script>
-											const element = document.getElementById("staff1");
-											element.toggle('selected')
-										</script>
-									</c:when>
-									<c:when test="${staff == 2}">
-										<script>
-											const element = document.getElementById("staff2");
-											element.toggle('selected')
-										</script>
-									</c:when>
-									<c:when test="${staff == 3}">
-										<script>
-											const element = document.getElementById("staff3");
-											element.toggle('selected')
-										</script>
-									</c:when>
-									<c:otherwise></c:otherwise>
-								</c:choose>
-								
-							</c:if>
+							<c:if test="${not empty staffId}">
+									<c:forEach var="i" begin="1" end="3">
+										<c:if test="${staffId == i}">
+											<script>
+													var select = document
+															.getElementById("staff_id");
+													select.options[${i-1}].selected = true;
+												</script>
+										</c:if>
+									</c:forEach>
+								</c:if>
 						</div>
 					</div>
 					<!-- end of スタッフ名 -->
@@ -182,10 +169,9 @@
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="patient_pattern"
 								id="patient_pattern" required>
-								<c:if test="${empty patient}">
+								<c:if test="${empty patientPattern}">
 									<option selected disabled>選択してください</option>
 								</c:if>
-
 								<option value="1">本人</option>
 								<option value="2">娘</option>
 								<option value="3">息子</option>
@@ -193,6 +179,17 @@
 								<option value="5">母</option>
 								<option value="6">親戚</option>
 								<option value="7">その他</option>
+								<c:if test="${not empty patientPattern}">
+									<c:forEach var="i" begin="1" end="7">
+										<c:if test="${patientPattern == i}">
+											<script>
+													var select = document
+															.getElementById("patient_pattern");
+													select.options[${i-1}].selected = true;
+												</script>
+										</c:if>
+									</c:forEach>
+								</c:if>
 							</select>
 						</div>
 					</div>
