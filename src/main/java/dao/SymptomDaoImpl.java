@@ -18,7 +18,7 @@ public class SymptomDaoImpl implements SymptomDao {
 		//checboxにチェックがない場合、処理を終える
 		if (options == null)
 			return;
-		
+
 		try (var con = ds.getConnection();) {
 			String sql = insertSQL();
 			var stmt = con.prepareStatement(sql);
@@ -40,5 +40,6 @@ public class SymptomDaoImpl implements SymptomDao {
 				+ "values (?,?)";
 		return sql;
 	}
+
 
 }

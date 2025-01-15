@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -41,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
 		String respContent = request.getParameter("response");
 		Integer staffId = Integer.parseInt(request.getParameter("staff_id"));
 
-		//バリデーション
+		//バリデーション変数
 		boolean isValid = true;
 
 		//相談終了時間が開始時間より前なら
@@ -68,6 +69,10 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("consContent", consContent);
 				request.setAttribute("respContent", respContent);
 				request.setAttribute("staffId", staffId);
+				String[] selectedSymptoms = request.getParameterValues("symptoms");
+				if(selectedSymptoms != null && selectedSymptoms.length != 0) {
+					request.setAttribute("selectedSymptoms",Arrays.asList(selectedSymptoms));					
+				}
 
 				request.getRequestDispatcher("/WEB-INF/view/register.jsp")
 						.forward(request, response);

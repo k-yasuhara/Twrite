@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -207,52 +208,72 @@
 						<div class="col-sm-auto form-check ms-3 py-2">
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="1"
-									name="symptoms" id="fever"> <label for="fever"
-									class="form-check-label">熱発</label>
+									name="symptoms" id="fever" 
+									<c:if test="${fn:contains(selectedSymptoms, '1')}">checked</c:if>
+									> <label for="fever"
+									class="form-check-label" >熱発</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="2"
-									name="symptoms" id="cough"> <label for="cough"
+									name="symptoms" id="cough"
+									<c:if test="${fn:contains(selectedSymptoms, '2')}">checked</c:if>
+									> <label for="cough"
 									class="form-check-label">咳嗽</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="3"
-									name="symptoms" id="stuffy_nose"> <label
+									name="symptoms" id="stuffy_nose"
+									<c:if test="${fn:contains(selectedSymptoms, '3')}">checked</c:if>
+									> <label
 									for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="4"
-									name="symptoms" id="sore_throat"> <label
+									name="symptoms" id="sore_throat"
+									<c:if test="${fn:contains(selectedSymptoms, '4')}">checked</c:if>
+									> <label
 									for="sore_throat" class="form-check-label">咽頭痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="5"
-									name="symptoms" id="throat_discomform"> <label
+									name="symptoms" id="throat_discomform"
+									<c:if test="${fn:contains(selectedSymptoms, '5')}">checked</c:if>
+									> <label
 									for="throat_discomform" class="form-check-label">咽頭違和感</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="6"
-									name="symptoms" id="stomachache"> <label
+									name="symptoms" id="stomachache"
+									<c:if test="${fn:contains(selectedSymptoms, '6')}">checked</c:if>
+									> <label
 									for="stomachache" class="form-check-label">腹痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="7"
-									name="symptoms" id="diarrhea"> <label for="diarrhea"
+									name="symptoms" id="diarrhea"
+									<c:if test="${fn:contains(selectedSymptoms, '7')}">checked</c:if>
+									> <label for="diarrhea"
 									class="form-check-label">下痢</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="8"
-									name="symptoms" id="nausea_vomiting"> <label
+									name="symptoms" id="nausea_vomiting"
+									<c:if test="${fn:contains(selectedSymptoms, '8')}">checked</c:if>
+									> <label
 									for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="9"
-									name="symptoms" id="burn"> <label for="burn"
+									name="symptoms" id="burn"
+									<c:if test="${fn:contains(selectedSymptoms, '9')}">checked</c:if>
+									> <label for="burn"
 									class="form-check-label">熱傷</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="10"
-									name="symptoms" id="bruise"> <label for="bruise"
+									name="symptoms" id="bruise"
+									<c:if test="${fn:contains(selectedSymptoms, '10')}">checked</c:if>
+									> <label for="bruise"
 									class="form-check-label">打撲</label>
 							</div>
 						</div>
