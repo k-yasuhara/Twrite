@@ -57,21 +57,21 @@ public class RecordDaoImpl implements RecordDao {
 
 	private RecordDB mapToRecord(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("r.id");
-		String registerId = rs.getString("r.register_id");
-		Date start = rs.getTimestamp("r.start_at");
-		Date end = rs.getTimestamp("r.end_at");
-		String consContent = rs.getString("r.consultation");
-		String respContent = rs.getString("r.response");
+		Integer id = (Integer) rs.getObject("id");
+		String registerId = rs.getString("register_id");
+		Date start = rs.getTimestamp("start_at");
+		Date end = rs.getTimestamp("end_at");
+		String consContent = rs.getString("consultation");
+		String respContent = rs.getString("response");
 		String symptoms = rs.getString("symptoms");
 		
-		String sName = rs.getString("s.name");
+		String sName = rs.getString("name");
 		Staff staff = new Staff(null, sName);
 				
-		String pAttribute = rs.getString("p.attribute");
+		String pAttribute = rs.getString("attribute");
 		Patient patient = new Patient(id, pAttribute);
 		
-		RecordDB record = new RecordDB(id, registerId, null, end, start, null, null, consContent, respContent, null, null, symptoms, staff, patient);
+		RecordDB record = new RecordDB(id, registerId, null, null, start, end, null, consContent, respContent, null, null, symptoms, staff, patient);
 		
 		return record;
 	}

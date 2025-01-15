@@ -108,7 +108,7 @@
                         <th scope="col" style="max-width: 250px;">対応内容</th>
                       </tr>
                     </thead>
-                    <c:forEach items="${recordList}" >
+                    <c:forEach items="${recordList}" var="r" >
                     
                     <tbody>
                       <tr>
@@ -127,14 +127,14 @@
                                 </a></td>
                             </table>
                         </th>
-                        <th ><c:out value="${recordList.id}" /></th>
-                        <td><c:out value="${recordList.start}" /></td>
-                        <td><c:out value="${recordList.end}" /></td>
-                        <td><c:out value="${recordList.staff.name}" /></td>
-                        <td><c:out value="${recordList.patient.attribute}" /></td>
-                        <td><c:out value="${recordList.symptoms}"/></td>
-                        <td><c:out value="${recordList.consContent}"/></td>
-                        <td><c:out value="${recordList.respContent}"/></td>
+                        <th ><c:out value="${r.id}" /></th>
+                        <td><c:out value="${r.start}" /></td>
+                        <td><c:out value="${r.end}" /></td>
+                        <td><c:out value="${r.staff.name}" /></td>
+                        <td><c:out value="${r.patient.attribute}" /></td>
+                        <td><c:out value="${r.symptoms}"/></td>
+                        <td><c:out value="${r.consContent}"/></td>
+                        <td><c:out value="${r.respContent}"/></td>
                       </tr>
                     </tbody>
                     </c:forEach>

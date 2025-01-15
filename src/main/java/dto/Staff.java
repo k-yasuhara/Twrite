@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Staff {
 	private Integer id;
-	private String recodsId;
+	private String name;
 }

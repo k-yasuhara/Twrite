@@ -59,7 +59,7 @@
 										d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                             </svg> <span class="ms-2">新規入力</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <svg
+						<li class="nav-item"><a class="nav-link" href="viewlist"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
