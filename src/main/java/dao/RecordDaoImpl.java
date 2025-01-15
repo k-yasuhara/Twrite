@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class RecordDaoImpl implements RecordDao {
 			var stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				recordList.add(mapToRecord(rs));
+				recordList.add(mapToRecordViewList(rs));
 			}
 		} catch (Exception e) {
 			throw e;
@@ -55,7 +56,7 @@ public class RecordDaoImpl implements RecordDao {
 		return sql;
 	}
 
-	private RecordDB mapToRecord(ResultSet rs) throws Exception {
+	private RecordDB mapToRecordViewList(ResultSet rs) throws Exception {
 
 		Integer id = (Integer) rs.getObject("id");
 		String registerId = rs.getString("register_id");
@@ -64,15 +65,16 @@ public class RecordDaoImpl implements RecordDao {
 		String consContent = rs.getString("consultation");
 		String respContent = rs.getString("response");
 		String symptoms = rs.getString("symptoms");
-		
+
 		String sName = rs.getString("name");
 		Staff staff = new Staff(null, sName);
-				
+
 		String pAttribute = rs.getString("attribute");
 		Patient patient = new Patient(id, pAttribute);
-		
-		RecordDB record = new RecordDB(id, registerId, null, null, start, end, null, consContent, respContent, null, null, symptoms, staff, patient);
-		
+
+		RecordDB record = new RecordDB(id, registerId, null, null, start, end, null, consContent, respContent, null,
+				null, symptoms, staff, patient);
+
 		return record;
 	}
 
@@ -113,6 +115,43 @@ public class RecordDaoImpl implements RecordDao {
 				+ "where admins.login_id = ?";
 
 		return sql;
+	}
+
+	@Override
+	public RecordDB findById(int id) throws Exception {
+		RecordDB record = null;
+
+		try (var con = ds.getConnection();) {
+			String sql = "select * from records where id = ?";
+			var stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				record = mapToRecord(rs);
+			}
+
+		} catch (Exception e) {
+			throw e;
+		}
+		return record;
+	}
+
+	private RecordDB mapToRecord(ResultSet rs) throws SQLException {
+
+		Integer id = (Integer) rs.getObject("id");
+		String registerId = rs.getString("register_id");
+		Date start = rs.getTimestamp("start_at");
+		Date end = rs.getTimestamp("end_at");
+		Integer patientP = (Integer) rs.getObject("patient_pattern");
+		String consContent = rs.getString("consultation");
+		String respContent = rs.getString("response");
+		Integer staffId = (Integer) rs.getObject("staff_id");
+
+		RecordDB record = new RecordDB(id, registerId, null, null, start, end, patientP, consContent, respContent, 0,
+				staffId, null, null, null);
+
+		return record;
 	}
 
 }

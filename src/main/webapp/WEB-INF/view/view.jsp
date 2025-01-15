@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -60,8 +60,8 @@
 										d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                             </svg> <span class="ms-2">新規入力</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="viewlist"> <svg
-									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						<li class="nav-item"><a class="nav-link" href="viewlist">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
@@ -92,16 +92,11 @@
 				</div>
 			</nav>
 			<!-- End of サイドバー -->
-
 			<!-- main -->
 			<main class="col-10 col-sm px-4 py-4">
-				<c:if test="${not empty errorMsg}">
-					<div class="alert alert-danger" role="alert">
-						<c:out value="${errorMsg}" />
-					</div>
-				</c:if>
 				<!-- topic -->
-				<h1 class="h2 fw-bold">◆新規入力</h1>
+				<h1 class="h2 fw-bold">◆閲覧画面</h1>
+
 
 				<form method="post">
 					<!-- 相談開始時間 -->
@@ -116,7 +111,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="start_at"
-								name="start_at" value="${start}" required>
+								name="start_at" value="${record.start}" required>
 						</div>
 					</div>
 					<!-- end of 相談開始時間  -->
@@ -134,24 +129,24 @@
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="staff_id" id="staff_id"
 								required>
-								<c:if test="${empty staffId}">
+								<c:if test="${empty record.staffId}">
 									<option selected disabled>選択してください</option>
 								</c:if>
 								<option value="1">渡邊</option>
 								<option value="2">高比良</option>
 								<option value="3">松井</option>
 							</select>
-							<c:if test="${not empty staffId}">
-									<c:forEach var="i" begin="1" end="3">
-										<c:if test="${staffId == i}">
-											<script>
+							<c:if test="${not empty record.staffId}">
+								<c:forEach var="i" begin="1" end="3">
+									<c:if test="${record.staffId == i}">
+										<script>
 													var select = document
 															.getElementById("staff_id");
 													select.options[${i-1}].selected = true;
 												</script>
-										</c:if>
-									</c:forEach>
-								</c:if>
+									</c:if>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 					<!-- end of スタッフ名 -->
@@ -170,7 +165,7 @@
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="patient_pattern"
 								id="patient_pattern" required>
-								<c:if test="${empty patientPattern}">
+								<c:if test="${empty record.patientPattern}">
 									<option selected disabled>選択してください</option>
 								</c:if>
 								<option value="1">本人</option>
@@ -180,9 +175,9 @@
 								<option value="5">母</option>
 								<option value="6">親戚</option>
 								<option value="7">その他</option>
-								<c:if test="${not empty patientPattern}">
+								<c:if test="${not empty record.patientPattern}">
 									<c:forEach var="i" begin="1" end="7">
-										<c:if test="${patientPattern == i}">
+										<c:if test="${record.patientPattern == i}">
 											<script>
 													var select = document
 															.getElementById("patient_pattern");
@@ -208,93 +203,83 @@
 						<div class="col-sm-auto form-check ms-3 py-2">
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="1"
-									name="symptoms" id="fever" 
-									<c:forEach items="${not empty selectedSymptoms}" >
-										<c:if test="${selectedSymptoms == '1'}">checked</c:if>
-									</c:forEach>
-									> <label for="fever"
-									class="form-check-label" >熱発</label>
+									name="symptoms" id="fever"
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 1}">checked</c:if>
+									</c:forEach>>
+								<label for="fever" class="form-check-label">熱発</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="2"
 									name="symptoms" id="cough"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '2'}">checked</c:if>
-									</c:forEach>
-									> <label for="cough"
-									class="form-check-label">咳嗽</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 2}">checked</c:if>
+									</c:forEach>>
+								<label for="cough" class="form-check-label">咳嗽</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="3"
 									name="symptoms" id="stuffy_nose"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '3'}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 3}">checked</c:if>
+									</c:forEach>>
+								<label for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="4"
 									name="symptoms" id="sore_throat"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '4'}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="sore_throat" class="form-check-label">咽頭痛</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 4}">checked</c:if>
+									</c:forEach>>
+								<label for="sore_throat" class="form-check-label">咽頭痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="5"
 									name="symptoms" id="throat_discomform"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '5'}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="throat_discomform" class="form-check-label">咽頭違和感</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 5}">checked</c:if>
+									</c:forEach>>
+								<label for="throat_discomform" class="form-check-label">咽頭違和感</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="6"
 									name="symptoms" id="stomachache"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '6'}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="stomachache" class="form-check-label">腹痛</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 6}">checked</c:if>
+									</c:forEach>>
+								<label for="stomachache" class="form-check-label">腹痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="7"
 									name="symptoms" id="diarrhea"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '7'}">checked</c:if>
-									</c:forEach>
-									> <label for="diarrhea"
-									class="form-check-label">下痢</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 7}">checked</c:if>
+									</c:forEach>>
+								<label for="diarrhea" class="form-check-label">下痢</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="8"
 									name="symptoms" id="nausea_vomiting"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '8'}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 8}">checked</c:if>
+									</c:forEach>>
+								<label for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="9"
 									name="symptoms" id="burn"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '9'}">checked</c:if>
-									</c:forEach>
-									> <label for="burn"
-									class="form-check-label">熱傷</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 9}">checked</c:if>
+									</c:forEach>>
+								<label for="burn" class="form-check-label">熱傷</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="10"
 									name="symptoms" id="bruise"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '10'}">checked</c:if>
-									</c:forEach>
-									> <label for="bruise"
-									class="form-check-label">打撲</label>
+									<c:forEach items="${selectedSymptoms}" var="r">
+										<c:if test="${selectedSymptoms == 10}">checked</c:if>
+									</c:forEach>>
+								<label for="bruise" class="form-check-label">打撲</label>
 							</div>
 						</div>
 					</div>
@@ -312,7 +297,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="consultation"
-								id="consultation" rows="3">${consContent}</textarea>
+								id="consultation" rows="3">${record.consContent}</textarea>
 						</div>
 					</div>
 					<!-- end of 相談内容 -->
@@ -328,7 +313,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="response" id="response"
-								rows="3">${respContent}</textarea>
+								rows="3">${record.respContent}</textarea>
 						</div>
 					</div>
 					<!-- end of 対応内容 -->
@@ -345,12 +330,40 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="end_at"
-								name="end_at" value="${end}" required>
+								name="end_at" value="${record.end}" required>
 						</div>
 					</div>
 					<!-- end of 相談終了時間  -->
+					<button type="button" class="btn btn-secondary ms-1 mb-3"
+						onclick="history.back()">戻る</button>
+					<button type="submit" class="btn btn-warning ms-3 mb-3"
+						formaction="/edit">編集</button>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-success ms-3 mb-3"
+						data-bs-toggle="modal" data-bs-target="#permitModal">承認</button>
 
-					<button type="submit" class="btn btn-primary ms-1 mb-3">確定</button>
+					<!-- Modal -->
+					<div class="modal fade" id="permitModal" tabindex="-1"
+						aria-labelledby="permitModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="permitModalLabel">承認作業</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">記録を承認しますか？</div>
+								<div class="modal-footer">
+									<a href="/remand">
+										<button type="button" class="btn btn-secondary">差し戻し</button>
+									</a> <a href="/permit">
+										<button type="button" class="btn btn-primary">承認</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end of Modal -->
 				</form>
 
 			</main>
@@ -360,6 +373,6 @@
 	<footer>
 		<p>&copy; 2024 Twrite. All rights reserved.</p>
 	</footer>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
