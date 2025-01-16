@@ -17,7 +17,6 @@ import dao.DaoFactory;
 import dao.RecordDao;
 import dao.SymptomDao;
 import dto.RecordDB;
-import dto.Symptom;
 
 @WebServlet("/edit")
 public class EditServlet extends HttpServlet {
@@ -32,21 +31,21 @@ public class EditServlet extends HttpServlet {
 			//クエリパラメータを取得
 			Integer id = Integer.parseInt(request.getParameter("id"));
 
-			//recordsDBのデータを取得、リクエストに格納
+			//クエリパラメータからrecordsDBのデータを取得、リクエストに格納
 			RecordDao reDao = DaoFactory.createRecordDao();
 			RecordDB record = reDao.findById(id);
 			request.setAttribute("record", record);
 
 			//symptomsDBのデータを取得、リクエストに格納
 			SymptomDao symDao = DaoFactory.creatSymptomDao();
-			List<String> symptoms = symDao.findById(id);
+			List<String> symptoms = symDao.findByIdView(id);
 
 			//listがnullの場合リクエスト処理不要
 			if (symptoms != null && symptoms.size() != 0) {
 				request.setAttribute("selectedSymptoms", symptoms);
 			}
 
-			//クエリパラメータ(loginId)を取得
+			//セッションオブジェクト(loginId)を取得
 			String loginId = (String) request.getSession().getAttribute("loginId");
 			request.setAttribute("loginId", loginId);
 
@@ -58,12 +57,14 @@ public class EditServlet extends HttpServlet {
 		}
 	}
 
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		//DB:records用の入力値の取得
-		String registerId = (String) request.getSession().getAttribute("loginId");
+		//クエリパラメータを取得
+		Integer id = Integer.parseInt(request.getParameter("id"));
+
+		//formの入力内容を取得
 		String strStart = request.getParameter("start_at");
 		strStart = strStart.replace("T", " ");
 		String strEnd = request.getParameter("end_at");
@@ -104,7 +105,7 @@ public class EditServlet extends HttpServlet {
 				//チェックボックスの入力を配列に格納しlist型にしてリクエストに格納
 				String[] selectedSymptoms = request.getParameterValues("symptoms");
 				//未チェックなら処理不要
-				if (selectedSymptoms != null && selectedSymptoms.length != 0) {
+				if (selectedSymptoms != null) {
 					request.setAttribute("selectedSymptoms", Arrays.asList(selectedSymptoms));
 				}
 
@@ -115,12 +116,12 @@ public class EditServlet extends HttpServlet {
 
 			//バリデーションOK
 			//dtoにデータ格納
-			RecordDB record = new RecordDB(null, registerId, null, null, startAt, endAt, patientPattern, consContent,
+			RecordDB record = new RecordDB(id, null, null, null, startAt, endAt, patientPattern, consContent,
 					respContent, null, staffId, null, null, null);
 
 			//DBにデータ追加と自動採番IDを格納
 			RecordDao recordDao = DaoFactory.createRecordDao();
-			Integer recordsId = recordDao.insert(record);
+			recordDao.update(record);
 
 			//symptomsへのinsert
 			//DB:symptoms用の入力値の取得
@@ -128,13 +129,18 @@ public class EditServlet extends HttpServlet {
 
 			String[] strSymptomList = request.getParameterValues("symptoms");
 
-			//入力ありの場合
-			if (strSymptomList != null && strSymptomList.length != 0) {
-				Symptom symptom = new Symptom();
-				symptom.setRecodsId(recordsId);
-				//挿入したrecordsのIDを取得
+			//配列がnullで、symptomsDBのレコードがあれば削除
+			if (strSymptomList == null) {
 				SymptomDao symptomDao = DaoFactory.creatSymptomDao();
-				symptomDao.insert(symptom, strSymptomList);
+				if (symptomDao.findByIdDelete(id) != null) {
+					symptomDao.delete(symptomDao.findByIdDelete(id));
+				}
+
+				//入力ありの場合
+			} else if (strSymptomList != null) {
+				//レコードの管理番号をもとにDBを更新
+				SymptomDao symptomDao = DaoFactory.creatSymptomDao();
+				symptomDao.update(id, strSymptomList);
 
 			}
 

@@ -6,8 +6,15 @@ import dto.Symptom;
 
 public interface SymptomDao {
 
-	void insert(Symptom symptom, String[] options) throws Exception;
+	void insert(Integer recordsId, String[] options) throws Exception;
+
+	List<String> findByIdView(int id) throws Exception;
+
+	void update(Integer recordsId, String[] options) throws Exception;
 	
-	List<String> findById(int id) throws Exception;
+	void delete(List<Symptom> symptom)throws Exception;
 	
+	List<Symptom> findByIdDelete(int id) throws Exception;
+	
+
 }

@@ -42,12 +42,12 @@ create table symptoms_pattern (
     symptoms_name varchar(30)
 );
 
-CREATE TABLE symptoms (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    records_id INT NOT NULL,
-    symptoms_id INT NOT NULL,
-    FOREIGN KEY (records_id) REFERENCES records(id),
-    FOREIGN KEY (symptoms_id) REFERENCES symptoms_pattern(id)
+create table symptoms (
+	id int primary key auto_increment,
+    records_id int not null,
+    symptoms_id int not null,
+    FOREIGN KEY (records_id) REFERENCES records(id) on delete cascade on update restrict,
+    FOREIGN KEY (symptoms_id) REFERENCES symptoms_pattern(id) on delete cascade on update restrict
 );
 
 

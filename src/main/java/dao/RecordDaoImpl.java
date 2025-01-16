@@ -59,7 +59,7 @@ public class RecordDaoImpl implements RecordDao {
 	private RecordDB mapToRecordViewList(ResultSet rs) throws Exception {
 
 		Integer id = (Integer) rs.getObject("id");
-		String registerId = rs.getString("register_id");
+		Integer registerId = (Integer) rs.getObject("register_id");
 		Date start = rs.getTimestamp("start_at");
 		Date end = rs.getTimestamp("end_at");
 		String consContent = rs.getString("consultation");
@@ -86,13 +86,13 @@ public class RecordDaoImpl implements RecordDao {
 			String sql = insertSQL();
 			var stmt = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
 
-			stmt.setTimestamp(1, new Timestamp(record.getStart().getTime()));
-			stmt.setTimestamp(2, new Timestamp(record.getEnd().getTime()));
-			stmt.setObject(3, record.getPatientPattern(), Types.INTEGER);
-			stmt.setString(4, record.getConsContent());
-			stmt.setString(5, record.getRespContent());
-			stmt.setObject(6, record.getStaffId(), Types.INTEGER);
-			stmt.setString(7, record.getRegisterId());
+			stmt.setObject(1, record.getRegisterId(), Types.INTEGER);
+			stmt.setTimestamp(2, new Timestamp(record.getStart().getTime()));
+			stmt.setTimestamp(3, new Timestamp(record.getEnd().getTime()));
+			stmt.setObject(4, record.getPatientPattern(), Types.INTEGER);
+			stmt.setString(5, record.getConsContent());
+			stmt.setString(6, record.getRespContent());
+			stmt.setObject(7, record.getStaffId(), Types.INTEGER);
 			stmt.executeUpdate();
 
 			//自動採番された管理番号を戻り値に格納
@@ -110,9 +110,8 @@ public class RecordDaoImpl implements RecordDao {
 	private String insertSQL() {
 		String sql = "insert into records"
 				+ "(register_id, registered_at, updated_at, start_at, end_at, patient_pattern, consultation, response, editor, staff_id)"
-				+ "select admins.id ,now(),now(),?,?,?,?,?,0,? "
-				+ "from admins "
-				+ "where admins.login_id = ?";
+				+ "values "
+				+ "(? ,now(), now() ,? ,? ,? ,? ,? ,0, ?);";
 
 		return sql;
 	}
@@ -128,7 +127,7 @@ public class RecordDaoImpl implements RecordDao {
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				record = mapToRecord(rs);
+				record = mapToRecordView(rs);
 			}
 
 		} catch (Exception e) {
@@ -137,10 +136,10 @@ public class RecordDaoImpl implements RecordDao {
 		return record;
 	}
 
-	private RecordDB mapToRecord(ResultSet rs) throws SQLException {
+	private RecordDB mapToRecordView(ResultSet rs) throws SQLException {
 
 		Integer id = (Integer) rs.getObject("id");
-		String registerId = rs.getString("register_id");
+		Integer registerId = (Integer) rs.getObject("register_id");
 		Date start = rs.getTimestamp("start_at");
 		Date end = rs.getTimestamp("end_at");
 		Integer patientP = (Integer) rs.getObject("patient_pattern");
@@ -152,6 +151,40 @@ public class RecordDaoImpl implements RecordDao {
 				staffId, null, null, null);
 
 		return record;
+	}
+
+	@Override
+	public void update(RecordDB record) throws Exception {
+
+		try (var con = ds.getConnection();) {
+			String sql = updateSQL();
+			var stmt = con.prepareStatement(sql);
+
+			stmt.setTimestamp(1, new Timestamp(record.getStart().getTime()));
+			stmt.setTimestamp(2, new Timestamp(record.getEnd().getTime()));
+			stmt.setObject(3, record.getPatientPattern(), Types.INTEGER);
+			stmt.setString(4, record.getConsContent());
+			stmt.setString(5, record.getRespContent());
+			stmt.setObject(6, record.getStaffId(), Types.INTEGER);
+			stmt.setObject(7, record.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	private String updateSQL() {
+		String sql = "update records set "
+				+ "updated_at = now(), "
+				+ "start_at=?, "
+				+ "end_at=?, "
+				+ "patient_pattern=?, "
+				+ "consultation=?, "
+				+ "response=?, "
+				+ "staff_id=? "
+				+ "where id=?;";
+		return sql;
 	}
 
 }

@@ -8,8 +8,12 @@ public interface RecordDao {
 	// レコードを全取得
 	List<RecordDB> findAll() throws Exception;
 
+	//レコードを1件表示
+	RecordDB findById(int id) throws Exception;
+
 	// レコードを登録
 	Integer insert(RecordDB record) throws Exception;
-
-	RecordDB findById(int id) throws Exception;
+	
+	void update(RecordDB record) throws Exception;
+	
 }

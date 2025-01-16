@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Symptom {
 	private Integer id;
-	private Integer recodsId;
+	private Integer recordsId;
 	private Integer symptomsId;
 }

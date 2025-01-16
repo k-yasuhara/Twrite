@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RecordDB {
 	private Integer id;
-	private String registerId;
+	private Integer registerId;
 	private Date registered;
 	private Date updated;
 	private Date start;

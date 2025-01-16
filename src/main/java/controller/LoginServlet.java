@@ -33,11 +33,13 @@ public class LoginServlet extends HttpServlet {
 			Admin admin = adminDao.findByLoginIdAndPass(loginId, loginPass);
 
 			if (admin != null) {
+				request.getSession().setAttribute("loginNum", admin.getId());
 				request.getSession().setAttribute("loginId", admin.getLoginId());
 				request.getSession().setAttribute("loginName", admin.getName());
 				response.sendRedirect("top");
 			//ログイン失敗
 			} else {
+				//入力されたloginIdを再表示
 				request.setAttribute("loginId", loginId);
 				request.setAttribute("errorMsg", true);
 				request.getRequestDispatcher("/WEB-INF/view/login.jsp")
