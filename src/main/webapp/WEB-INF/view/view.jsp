@@ -95,7 +95,7 @@
 			<!-- main -->
 			<main class="col-10 col-sm px-4 py-4">
 				<!-- topic -->
-				<h1 class="h2 fw-bold">◆閲覧画面</h1>
+				<h1 class="h2 fw-bold">◆閲覧画面(読み取り専用)</h1>
 
 
 				<form method="post">
@@ -111,7 +111,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="start_at"
-								name="start_at" value="${record.start}" required>
+								name="start_at" value="${record.start}" readonly>
 						</div>
 					</div>
 					<!-- end of 相談開始時間  -->
@@ -128,7 +128,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="staff_id" id="staff_id"
-								required>
+								readonly>
 								<c:if test="${empty record.staffId}">
 									<option selected disabled>選択してください</option>
 								</c:if>
@@ -164,7 +164,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="patient_pattern"
-								id="patient_pattern" required>
+								id="patient_pattern" readonly>
 								<c:if test="${empty record.patientPattern}">
 									<option selected disabled>選択してください</option>
 								</c:if>
@@ -203,92 +203,92 @@
 						<div class="col-sm-auto form-check ms-3 py-2">
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="1"
-									name="symptoms" id="fever" 
+									name="symptoms" id="fever" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 1}">checked</c:if>
 									</c:forEach>
-									> <label for="fever"
+									> <label 
 									class="form-check-label" >熱発</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="2"
-									name="symptoms" id="cough"
+									name="symptoms" id="cough" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 2}">checked</c:if>
 									</c:forEach>
-									> <label for="cough"
+									> <label 
 									class="form-check-label">咳嗽</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="3"
-									name="symptoms" id="stuffy_nose"
+									name="symptoms" id="stuffy_nose" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 3}">checked</c:if>
 									</c:forEach>
 									> <label
-									for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
+									 class="form-check-label">鼻汁・鼻閉</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="4"
-									name="symptoms" id="sore_throat"
+									name="symptoms" id="sore_throat" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 4}">checked</c:if>
 									</c:forEach>
 									> <label
-									for="sore_throat" class="form-check-label">咽頭痛</label>
+									 class="form-check-label">咽頭痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="5"
-									name="symptoms" id="throat_discomform"
+									name="symptoms" id="throat_discomform" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 5}">checked</c:if>
 									</c:forEach>
 									> <label
-									for="throat_discomform" class="form-check-label">咽頭違和感</label>
+									 class="form-check-label">咽頭違和感</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="6"
-									name="symptoms" id="stomachache"
+									name="symptoms" id="stomachache" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 6}">checked</c:if>
 									</c:forEach>
 									> <label
-									for="stomachache" class="form-check-label">腹痛</label>
+									 class="form-check-label">腹痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="7"
-									name="symptoms" id="diarrhea"
+									name="symptoms" id="diarrhea" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 7}">checked</c:if>
 									</c:forEach>
-									> <label for="diarrhea"
+									> <label 
 									class="form-check-label">下痢</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="8"
-									name="symptoms" id="nausea_vomiting"
+									name="symptoms" id="nausea_vomiting" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 8}">checked</c:if>
 									</c:forEach>
 									> <label
-									for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
+									 class="form-check-label">嘔気・嘔吐</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="9"
-									name="symptoms" id="burn"
+									name="symptoms" id="burn" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 9}">checked</c:if>
 									</c:forEach>
-									> <label for="burn"
+									> <label 
 									class="form-check-label">熱傷</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="10"
-									name="symptoms" id="bruise"
+									name="symptoms" id="bruise" readonly
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 10}">checked</c:if>
 									</c:forEach>
-									> <label for="bruise"
+									> <label 
 									class="form-check-label">打撲</label>
 							</div>
 						</div>
@@ -308,7 +308,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="consultation"
-								id="consultation" rows="3">${record.consContent}</textarea>
+								id="consultation" rows="3" readonly>${record.consContent}</textarea>
 						</div>
 					</div>
 					<!-- end of 相談内容 -->
@@ -324,7 +324,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="response" id="response"
-								rows="3">${record.respContent}</textarea>
+								rows="3" readonly>${record.respContent}</textarea>
 						</div>
 					</div>
 					<!-- end of 対応内容 -->
@@ -341,15 +341,24 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="end_at"
-								name="end_at" value="${record.end}" required>
+								name="end_at" value="${record.end}" readonly>
 						</div>
 					</div>
 					<!-- end of 相談終了時間  -->
+					
+					<!-- backbutton  -->
 					<button type="button" class="btn btn-secondary ms-1 mb-3"
 						onclick="history.back()">戻る</button>
+					<!-- end of backbutton  -->
+					
+					<!-- editbutton  -->
 					<button type="submit" class="btn btn-warning ms-3 mb-3"
-						formaction="/edit">編集</button>
-					<!-- Button trigger modal -->
+						formaction="edit?id=${record.id}">編集</button>
+					<!-- end of editbutton  -->
+					
+					
+					<!-- permitButton trigger modal -->
+						<c:if test="${loginId.equals('sv01')}">
 					<button type="button" class="btn btn-success ms-3 mb-3"
 						data-bs-toggle="modal" data-bs-target="#permitModal">承認</button>
 
@@ -365,15 +374,16 @@
 								</div>
 								<div class="modal-body">記録を承認しますか？</div>
 								<div class="modal-footer">
-									<a href="/remand">
+									<a href="remand?id=${record.id}">
 										<button type="button" class="btn btn-secondary">差し戻し</button>
-									</a> <a href="/permit">
+									</a> <a href="permit?id=${record.id}">
 										<button type="button" class="btn btn-primary">承認</button>
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
+					</c:if>					
 					<!-- end of Modal -->
 				</form>
 
@@ -384,6 +394,6 @@
 	<footer>
 		<p>&copy; 2024 Twrite. All rights reserved.</p>
 	</footer>
-	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="<%= request.getContextPath() %>/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
