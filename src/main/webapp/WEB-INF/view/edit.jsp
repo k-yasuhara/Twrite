@@ -24,7 +24,7 @@
 					class="d-inline-block align-text-top"> 〇〇救急相談センター
 				</a>
 				<ul class="nav justify-content-end">
-					<li class="nav-item"><a class="nav-link disabled">※救急相談OP01※</a>
+					<li class="nav-item"><a class="nav-link disabled"><c:out value="${loginName}" /></a>
 					</li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="logout">ログアウト</a></li>
@@ -111,7 +111,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="start_at"
-								name="start_at" value="${record.start}" readonly>
+								name="start_at" value="${record.start}" required>
 						</div>
 					</div>
 					<!-- end of 相談開始時間  -->
@@ -128,7 +128,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="staff_id" id="staff_id"
-								readonly>
+								required>
 								<c:if test="${empty record.staffId}">
 									<option selected disabled>選択してください</option>
 								</c:if>
@@ -164,7 +164,7 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<select class="form-select" name="patient_pattern"
-								id="patient_pattern" readonly>
+								id="patient_pattern" required>
 								<c:if test="${empty record.patientPattern}">
 									<option selected disabled>選択してください</option>
 								</c:if>
@@ -203,92 +203,92 @@
 						<div class="col-sm-auto form-check ms-3 py-2">
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="1"
-									name="symptoms" id="fever" readonly
+									name="symptoms" id="fever" 
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 1}">checked</c:if>
 									</c:forEach>
-									> <label 
+									> <label for="fever"
 									class="form-check-label" >熱発</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="2"
-									name="symptoms" id="cough" readonly
+									name="symptoms" id="cough"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 2}">checked</c:if>
 									</c:forEach>
-									> <label 
+									> <label for="cough"
 									class="form-check-label">咳嗽</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="3"
-									name="symptoms" id="stuffy_nose" readonly
+									name="symptoms" id="stuffy_nose"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 3}">checked</c:if>
 									</c:forEach>
 									> <label
-									 class="form-check-label">鼻汁・鼻閉</label>
+									for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="4"
-									name="symptoms" id="sore_throat" readonly
+									name="symptoms" id="sore_throat"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 4}">checked</c:if>
 									</c:forEach>
 									> <label
-									 class="form-check-label">咽頭痛</label>
+									for="sore_throat" class="form-check-label">咽頭痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="5"
-									name="symptoms" id="throat_discomform" readonly
+									name="symptoms" id="throat_discomform"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 5}">checked</c:if>
 									</c:forEach>
 									> <label
-									 class="form-check-label">咽頭違和感</label>
+									for="throat_discomform" class="form-check-label">咽頭違和感</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="6"
-									name="symptoms" id="stomachache" readonly
+									name="symptoms" id="stomachache"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 6}">checked</c:if>
 									</c:forEach>
 									> <label
-									 class="form-check-label">腹痛</label>
+									for="stomachache" class="form-check-label">腹痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="7"
-									name="symptoms" id="diarrhea" readonly
+									name="symptoms" id="diarrhea"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 7}">checked</c:if>
 									</c:forEach>
-									> <label 
+									> <label for="diarrhea"
 									class="form-check-label">下痢</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="8"
-									name="symptoms" id="nausea_vomiting" readonly
+									name="symptoms" id="nausea_vomiting"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 8}">checked</c:if>
 									</c:forEach>
 									> <label
-									 class="form-check-label">嘔気・嘔吐</label>
+									for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="9"
-									name="symptoms" id="burn" readonly
+									name="symptoms" id="burn"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 9}">checked</c:if>
 									</c:forEach>
-									> <label 
+									> <label for="burn"
 									class="form-check-label">熱傷</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="10"
-									name="symptoms" id="bruise" readonly
+									name="symptoms" id="bruise"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 10}">checked</c:if>
 									</c:forEach>
-									> <label 
+									> <label for="bruise"
 									class="form-check-label">打撲</label>
 							</div>
 						</div>
@@ -308,7 +308,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="consultation"
-								id="consultation" rows="3" readonly>${record.consContent}</textarea>
+								id="consultation" rows="3" >${record.consContent}</textarea>
 						</div>
 					</div>
 					<!-- end of 相談内容 -->
@@ -324,7 +324,7 @@
 						<!-- end of label枠 -->
 						<div class="ms-3 py-2" style="width: 500px;">
 							<textarea class="form-control" name="response" id="response"
-								rows="3" readonly>${record.respContent}</textarea>
+								rows="3" >${record.respContent}</textarea>
 						</div>
 					</div>
 					<!-- end of 対応内容 -->
@@ -341,50 +341,12 @@
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
 							<input type="datetime-local" class="form-control" id="end_at"
-								name="end_at" value="${record.end}" readonly>
+								name="end_at" value="${record.end}" required>
 						</div>
 					</div>
 					<!-- end of 相談終了時間  -->
 					
-					<!-- backbutton  -->
-					<button type="button" class="btn btn-secondary ms-1 mb-3"
-						onclick="history.back()">戻る</button>
-					<!-- end of backbutton  -->
-					
-					<!-- editbutton  -->
-					<button type="submit" class="btn btn-warning ms-3 mb-3"
-						formaction="edit?id=${record.id}">編集</button>
-					<!-- end of editbutton  -->
-					
-					
-					<!-- permitButton trigger modal -->
-						<c:if test="${loginId.equals('sv01')}">
-					<button type="button" class="btn btn-success ms-3 mb-3"
-						data-bs-toggle="modal" data-bs-target="#permitModal">承認</button>
-
-					<!-- Modal -->
-					<div class="modal fade" id="permitModal" tabindex="-1"
-						aria-labelledby="permitModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="permitModalLabel">承認作業</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">記録を承認しますか？</div>
-								<div class="modal-footer">
-									<a href="remand?id=${record.id}">
-										<button type="button" class="btn btn-secondary">差し戻し</button>
-									</a> <a href="permit?id=${record.id}">
-										<button type="button" class="btn btn-primary">承認</button>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					</c:if>					
-					<!-- end of Modal -->
+					<button type="submit" class="btn btn-primary ms-1 mb-3">確定</button>
 				</form>
 
 			</main>

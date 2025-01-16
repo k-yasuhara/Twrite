@@ -11,17 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import dao.DaoFactory;
 import dao.RecordDao;
 
-
 @WebServlet("/viewlist")
 public class ViewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//アカウント名表示
+		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
 		try {
 			RecordDao recorddao = DaoFactory.createRecordDao();
 			request.setAttribute("recordList", recorddao.findAll());
-			
+
 			request.getRequestDispatcher("/WEB-INF/view/viewlist.jsp")
 					.forward(request, response);
 		} catch (Exception e) {

@@ -24,6 +24,8 @@ public class RegisterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//アカウント名表示
+		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
 		request.getRequestDispatcher("/WEB-INF/view/register.jsp")
 				.forward(request, response);
 	}
@@ -69,12 +71,12 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("consContent", consContent);
 				request.setAttribute("respContent", respContent);
 				request.setAttribute("staffId", staffId);
-				
+
 				//チェックボックスの入力を配列に格納しlist型にしてリクエストに格納
 				String[] selectedSymptoms = request.getParameterValues("symptoms");
 				//未チェックなら処理不要
-				if(selectedSymptoms != null && selectedSymptoms.length != 0) {
-					request.setAttribute("selectedSymptoms",Arrays.asList(selectedSymptoms));					
+				if (selectedSymptoms != null && selectedSymptoms.length != 0) {
+					request.setAttribute("selectedSymptoms", Arrays.asList(selectedSymptoms));
 				}
 
 				request.getRequestDispatcher("/WEB-INF/view/register.jsp")

@@ -21,7 +21,7 @@
                 </a>
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link disabled">※救急相談OP01※</a>
+                        <a class="nav-link disabled"><c:out value="${loginName}" /></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="logout">ログアウト</a>

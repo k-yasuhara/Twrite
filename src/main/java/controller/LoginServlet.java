@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
 
 			if (admin != null) {
 				request.getSession().setAttribute("loginId", admin.getLoginId());
+				request.getSession().setAttribute("loginName", admin.getName());
 				response.sendRedirect("top");
 			//ログイン失敗
 			} else {

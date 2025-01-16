@@ -23,7 +23,7 @@
 					height="24" class="d-inline-block align-text-top"> 〇〇救急相談センター
 				</a>
 				<ul class="nav justify-content-end">
-					<li class="nav-item"><a class="nav-link disabled">※救急相談OP01※</a>
+					<li class="nav-item"><a class="nav-link disabled"><c:out value="${loginName}" /></a>
 					</li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="logout">ログアウト</a></li>
