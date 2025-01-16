@@ -46,8 +46,8 @@ public class SymptomDaoImpl implements SymptomDao {
 	}
 
 	@Override
-	public List<Symptom> findById(int id) throws Exception {
-		List<Symptom> symptoms = new ArrayList<Symptom>();
+	public List<String> findById(int id) throws Exception {
+		List<String> symptoms = new ArrayList<>();
 
 		try (var con = ds.getConnection();) {
 			String sql = "select symptoms_id from symptoms where records_id = ?";
@@ -55,12 +55,11 @@ public class SymptomDaoImpl implements SymptomDao {
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				symptoms.add(mapToSymptoms(rs));
+				symptoms.add(mapToSymptoms(rs).getSymptomsId().toString());
 			}
 		} catch (Exception e) {
 			throw e;
 		}
-
 		return symptoms;
 	}
 

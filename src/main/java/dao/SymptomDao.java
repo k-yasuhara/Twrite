@@ -8,6 +8,6 @@ public interface SymptomDao {
 
 	void insert(Symptom symptom, String[] options) throws Exception;
 	
-	List<Symptom> findById(int id) throws Exception;
+	List<String> findById(int id) throws Exception;
 	
 }

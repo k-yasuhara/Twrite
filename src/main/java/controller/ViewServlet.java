@@ -13,7 +13,6 @@ import dao.DaoFactory;
 import dao.RecordDao;
 import dao.SymptomDao;
 import dto.RecordDB;
-import dto.Symptom;
 
 @WebServlet("/view")
 public class ViewServlet extends HttpServlet {
@@ -32,7 +31,7 @@ public class ViewServlet extends HttpServlet {
 			request.setAttribute("record", record);
 
 			SymptomDao symDao = DaoFactory.creatSymptomDao();
-			List<Symptom> symptoms = symDao.findById(id);
+			List<String> symptoms = symDao.findById(id);
 
 			if (symptoms != null && symptoms.size() != 0) {
 				request.setAttribute("selectedSymptoms", symptoms);
