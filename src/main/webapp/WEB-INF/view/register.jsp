@@ -209,8 +209,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="1"
 									name="symptoms" id="fever" 
-									<c:forEach items="${not empty selectedSymptoms}" >
-										<c:if test="${selectedSymptoms == '1'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 1}">checked</c:if>
 									</c:forEach>
 									> <label for="fever"
 									class="form-check-label" >熱発</label>
@@ -218,8 +218,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="2"
 									name="symptoms" id="cough"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '2'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 2}">checked</c:if>
 									</c:forEach>
 									> <label for="cough"
 									class="form-check-label">咳嗽</label>
@@ -227,8 +227,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="3"
 									name="symptoms" id="stuffy_nose"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '3'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 3}">checked</c:if>
 									</c:forEach>
 									> <label
 									for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
@@ -236,8 +236,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="4"
 									name="symptoms" id="sore_throat"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '4'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 4}">checked</c:if>
 									</c:forEach>
 									> <label
 									for="sore_throat" class="form-check-label">咽頭痛</label>
@@ -245,8 +245,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="5"
 									name="symptoms" id="throat_discomform"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '5'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 5}">checked</c:if>
 									</c:forEach>
 									> <label
 									for="throat_discomform" class="form-check-label">咽頭違和感</label>
@@ -254,8 +254,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="6"
 									name="symptoms" id="stomachache"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '6'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 6}">checked</c:if>
 									</c:forEach>
 									> <label
 									for="stomachache" class="form-check-label">腹痛</label>
@@ -263,8 +263,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="7"
 									name="symptoms" id="diarrhea"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '7'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 7}">checked</c:if>
 									</c:forEach>
 									> <label for="diarrhea"
 									class="form-check-label">下痢</label>
@@ -272,8 +272,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="8"
 									name="symptoms" id="nausea_vomiting"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '8'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 8}">checked</c:if>
 									</c:forEach>
 									> <label
 									for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
@@ -281,8 +281,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="9"
 									name="symptoms" id="burn"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '9'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 9}">checked</c:if>
 									</c:forEach>
 									> <label for="burn"
 									class="form-check-label">熱傷</label>
@@ -290,8 +290,8 @@
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="10"
 									name="symptoms" id="bruise"
-									<c:forEach items="${not empty selectedSymptoms}" var="r">
-										<c:if test="${selectedSymptoms == '10'}">checked</c:if>
+									<c:forEach items="${selectedSymptoms}" var="s">
+										<c:if test="${s == 10}">checked</c:if>
 									</c:forEach>
 									> <label for="bruise"
 									class="form-check-label">打撲</label>
