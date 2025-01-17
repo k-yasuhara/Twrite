@@ -99,6 +99,22 @@
 
 
 				<form method="post">
+					<!-- レコード管理番号 -->
+					<div class="row my-3">
+						<!-- label枠 -->
+						<div class="col-sm-2 ms-3 py-2 bg-body-secondary">
+							<div class="row">
+								<label for="start_at" class="col col-form-label ms-3 fw-bold">記録番号</label>
+							</div>
+						</div>
+						<!-- end of label枠 -->
+						<div class="col-sm-auto ms-3 py-2">
+							<input type="number" class="form-control " id="start_at" style="width: 100px;"
+								name="start_at" value="${record.id}" readonly>
+						</div>
+					</div>
+					<!-- end of レコード管理番号  -->
+					
 					<!-- 相談開始時間 -->
 					<div class="row my-3">
 						<!-- label枠 -->

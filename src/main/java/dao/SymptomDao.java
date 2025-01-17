@@ -5,16 +5,14 @@ import java.util.List;
 import dto.Symptom;
 
 public interface SymptomDao {
-
+	
+	//レコード作成
 	void insert(Integer recordsId, String[] options) throws Exception;
-
-	List<String> findByIdView(int id) throws Exception;
-
-	void update(Integer recordsId, String[] options) throws Exception;
 	
-	void delete(List<Symptom> symptom)throws Exception;
+	//レコード取得
+	List<Symptom> findById(Integer id) throws Exception;
 	
-	List<Symptom> findByIdDelete(int id) throws Exception;
-	
+	//レコード全削除
+	void delete(Integer symptom)throws Exception;
 
 }

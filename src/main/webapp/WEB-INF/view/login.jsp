@@ -28,7 +28,7 @@
 		<form action="" method="POST">
 			<div class="form-group">
 				<label for="login_id">ログインID</label> 
-				<input class="form-control" type="text" name="loginId"aria-label="default input example" value="<c:out value="${loginId}" />" required>
+				<input class="form-control" type="text" name="loginId"aria-label="default input example" value="<c:out value="${loginId}" />" required autofocus>
 			</div>
 			<div class="form-group">
 				<label for="password">パスワード</label>

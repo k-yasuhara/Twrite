@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import dao.DaoFactory;
 import dao.RecordDao;
 import dao.SymptomDao;
 import dto.RecordDB;
+import dto.Symptom;
 
 @WebServlet("/view")
 public class ViewServlet extends HttpServlet {
@@ -33,7 +35,11 @@ public class ViewServlet extends HttpServlet {
 
 			//symptomsDBのデータを取得、リクエストに格納
 			SymptomDao symDao = DaoFactory.creatSymptomDao();
-			List<String> symptoms = symDao.findByIdView(id);
+			List<Integer> symptoms = new ArrayList<>();
+			for(Symptom s : symDao.findById(id)) {
+				symptoms.add(s.getSymptomsId());
+			}
+			
 
 			//listがnullの場合リクエスト処理不要
 			if (symptoms != null && symptoms.size() != 0) {

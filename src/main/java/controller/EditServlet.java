@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import dao.DaoFactory;
 import dao.RecordDao;
 import dao.SymptomDao;
 import dto.RecordDB;
+import dto.Symptom;
 
 @WebServlet("/edit")
 public class EditServlet extends HttpServlet {
@@ -38,7 +40,10 @@ public class EditServlet extends HttpServlet {
 
 			//symptomsDBのデータを取得、リクエストに格納
 			SymptomDao symDao = DaoFactory.creatSymptomDao();
-			List<String> symptoms = symDao.findByIdView(id);
+			List<Integer> symptoms = new ArrayList<>();
+			for (Symptom s : symDao.findById(id)) {
+				symptoms.add(s.getSymptomsId());
+			}
 
 			//listがnullの場合リクエスト処理不要
 			if (symptoms != null && symptoms.size() != 0) {
@@ -119,33 +124,35 @@ public class EditServlet extends HttpServlet {
 			RecordDB record = new RecordDB(id, null, null, null, startAt, endAt, patientPattern, consContent,
 					respContent, null, staffId, null, null, null);
 
-			//DBにデータ追加と自動採番IDを格納
+			//recordsDBにデータ追加
 			RecordDao recordDao = DaoFactory.createRecordDao();
 			recordDao.update(record);
 
-			//symptomsへのinsert
+			//symptomsDBの更新（delet->insert)
 			//DB:symptoms用の入力値の取得
 			//チェックボックスの入力を配列に格納
 
 			String[] strSymptomList = request.getParameterValues("symptoms");
+			SymptomDao symptomDao = DaoFactory.creatSymptomDao();
 
 			//配列がnullで、symptomsDBのレコードがあれば削除
 			if (strSymptomList == null) {
-				SymptomDao symptomDao = DaoFactory.creatSymptomDao();
-				if (symptomDao.findByIdDelete(id) != null) {
-					symptomDao.delete(symptomDao.findByIdDelete(id));
+				if (symptomDao.findById(id) != null) {
+					symptomDao.delete(id);
 				}
-
-				//入力ありの場合
-			} else if (strSymptomList != null) {
-				//レコードの管理番号をもとにDBを更新
-				SymptomDao symptomDao = DaoFactory.creatSymptomDao();
-				symptomDao.update(id, strSymptomList);
-
+				//チェックボックス入力ありの場合
+			} else {
+				if (symptomDao.findById(id) != null) {
+					//元々レコード有：delete->insert
+					symptomDao.delete(id);
+					symptomDao.insert(id, strSymptomList);
+				} else
+					//元々レコード無：insertのみ
+					symptomDao.insert(id, strSymptomList);
 			}
 
 			//topにリダイレクト
-			response.sendRedirect("top");
+			response.sendRedirect("viewlist");
 
 		} catch (Exception e) {
 			throw new ServletException(e);

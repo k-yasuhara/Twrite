@@ -117,7 +117,7 @@ public class RecordDaoImpl implements RecordDao {
 	}
 
 	@Override
-	public RecordDB findById(int id) throws Exception {
+	public RecordDB findById(Integer id) throws Exception {
 		RecordDB record = null;
 
 		try (var con = ds.getConnection();) {
