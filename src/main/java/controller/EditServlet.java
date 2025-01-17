@@ -28,6 +28,9 @@ public class EditServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//アカウント名表示
 		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
+		//メニュー欄切り替え用にアカウントの管理番号を取得
+		Integer loginNum = (Integer) request.getSession().getAttribute("loginNum");
+		request.setAttribute("loginNumber", loginNum);
 
 		try {
 			//クエリパラメータを取得
@@ -122,7 +125,7 @@ public class EditServlet extends HttpServlet {
 			//バリデーションOK
 			//dtoにデータ格納
 			RecordDB record = new RecordDB(id, null, null, null, startAt, endAt, patientPattern, consContent,
-					respContent, null, staffId, null ,null, null, null);
+					respContent, null, staffId, null, null, null, null);
 
 			//recordsDBにデータ追加
 			RecordDao recordDao = DaoFactory.createRecordDao();

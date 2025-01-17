@@ -16,6 +16,10 @@ public class TopServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//アカウント名表示
 		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
+		//メニュー欄切り替え用にアカウントの管理番号を取得
+		Integer loginNum = (Integer) request.getSession().getAttribute("loginNum");
+		request.setAttribute("loginNumber", loginNum);
+
 		request.getRequestDispatcher("/WEB-INF/view/top.jsp")
 				.forward(request, response);
 	}

@@ -24,7 +24,7 @@ public class RecordDaoImpl implements RecordDao {
 		List<RecordDB> recordList = new ArrayList<>();
 
 		try (var con = ds.getConnection();) {
-			String sql = findAllSQL();
+			String sql = findAllSQL() + " group by r.id;";
 			var stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -46,14 +46,52 @@ public class RecordDaoImpl implements RecordDao {
 				+ " p.attribute,"
 				+ " r.consultation,"
 				+ " r.response,"
+				+ " r.approval_status,"
 				+ " group_concat(symptoms_pattern.symptoms_name separator \",\") as \"symptoms\" "
 				+ " from records as r "
 				+ " join staff as s on r.staff_id = s.id "
 				+ "	join patient as p on r.patient_pattern = p.id "
 				+ " join symptoms on r.id = symptoms.records_id "
-				+ " join symptoms_pattern on symptoms.symptoms_id = symptoms_pattern.id "
-				+ " group by r.id;";
+				+ " join symptoms_pattern on symptoms.symptoms_id = symptoms_pattern.id ";
+
 		return sql;
+	}
+
+	@Override
+	public List<RecordDB> findAll(Integer loginNum) throws Exception {
+		List<RecordDB> recordList = new ArrayList<>();
+
+		try (var con = ds.getConnection();) {
+			String sql = findAllSQL() + " where r.register_id = ? group by r.id;";
+			var stmt = con.prepareStatement(sql);
+			stmt.setInt(1, loginNum);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				recordList.add(mapToRecordViewList(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return recordList;
+	}
+
+	@Override
+	public List<RecordDB> findAll(Integer loginNum, Integer approval) throws Exception {
+		List<RecordDB> recordList = new ArrayList<>();
+
+		try (var con = ds.getConnection();) {
+			String sql = findAllSQL() + " where r.register_id = ? and r.approval_status = ? group by r.id;";
+			var stmt = con.prepareStatement(sql);
+			stmt.setInt(1, loginNum);
+			stmt.setInt(2, approval);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				recordList.add(mapToRecordViewList(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return recordList;
 	}
 
 	private RecordDB mapToRecordViewList(ResultSet rs) throws Exception {
@@ -73,7 +111,7 @@ public class RecordDaoImpl implements RecordDao {
 		Patient patient = new Patient(id, pAttribute);
 
 		RecordDB record = new RecordDB(id, registerId, null, null, start, end, null, consContent, respContent, null,
-				null,null, symptoms, staff, patient);
+				null, null, symptoms, staff, patient);
 
 		return record;
 	}
@@ -148,7 +186,7 @@ public class RecordDaoImpl implements RecordDao {
 		Integer staffId = (Integer) rs.getObject("staff_id");
 
 		RecordDB record = new RecordDB(id, registerId, null, null, start, end, patientP, consContent, respContent, 0,
-				staffId, null ,null, null, null);
+				staffId, null, null, null, null);
 
 		return record;
 	}
@@ -191,30 +229,30 @@ public class RecordDaoImpl implements RecordDao {
 	public void permit(Integer id) throws Exception {
 		try (var con = ds.getConnection();) {
 			String sql = "update records set "
-					   + "approval_status = 1 "
-					   + "where id = ?;";
+					+ "approval_status = 1 "
+					+ "where id = ?;";
 			var stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public void remand(Integer id) throws Exception {
 		try (var con = ds.getConnection();) {
 			String sql = "update records set "
-					   + "approval_status = 2 "
-					   + "where id = ?;";
+					+ "approval_status = 2 "
+					+ "where id = ?;";
 			var stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
 
 }

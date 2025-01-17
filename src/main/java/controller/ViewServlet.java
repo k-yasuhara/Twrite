@@ -24,6 +24,9 @@ public class ViewServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//アカウント名表示
 		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
+		//メニュー欄切り替え用にアカウントの管理番号を取得
+		Integer loginNum = (Integer) request.getSession().getAttribute("loginNum");
+		request.setAttribute("loginNumber", loginNum);
 		try {
 			//クエリパラメータを取得
 			Integer id = Integer.parseInt(request.getParameter("id"));
@@ -36,10 +39,9 @@ public class ViewServlet extends HttpServlet {
 			//symptomsDBのデータを取得、リクエストに格納
 			SymptomDao symDao = DaoFactory.creatSymptomDao();
 			List<Integer> symptoms = new ArrayList<>();
-			for(Symptom s : symDao.findById(id)) {
+			for (Symptom s : symDao.findById(id)) {
 				symptoms.add(s.getSymptomsId());
 			}
-			
 
 			//listがnullの場合リクエスト処理不要
 			if (symptoms != null && symptoms.size() != 0) {

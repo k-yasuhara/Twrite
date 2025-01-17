@@ -25,6 +25,10 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//アカウント名表示
 		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
+		//メニュー欄切り替え用にアカウントの管理番号を取得
+		Integer loginNum = (Integer) request.getSession().getAttribute("loginNum");
+		request.setAttribute("loginNumber", loginNum);
+
 		request.getRequestDispatcher("/WEB-INF/view/register.jsp")
 				.forward(request, response);
 	}
@@ -86,7 +90,7 @@ public class RegisterServlet extends HttpServlet {
 			//バリデーションOK
 			//dtoにデータ格納
 			RecordDB record = new RecordDB(null, registerId, null, null, startAt, endAt, patientPattern, consContent,
-					respContent, null, staffId,null, null, null, null);
+					respContent, null, staffId, null, null, null, null);
 
 			//DBにデータ追加と自動採番IDを格納
 			RecordDao recordDao = DaoFactory.createRecordDao();

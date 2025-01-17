@@ -7,6 +7,12 @@ import dto.RecordDB;
 public interface RecordDao {
 	//　レコードを全取得
 	List<RecordDB> findAll() throws Exception;
+	
+	//個人のレコードのみ取得
+	List<RecordDB> findAll(Integer loginNum) throws Exception;
+
+	//個人のレコードのみ取得,承認状況
+	List<RecordDB> findAll(Integer loginNum,Integer approval) throws Exception;
 
 	//　レコードを1件表示
 	RecordDB findById(Integer id) throws Exception;

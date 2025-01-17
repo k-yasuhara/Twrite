@@ -17,8 +17,11 @@ public class ViewListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//アカウント名表示
+		//アカウント名表示（ヘッダー用）
 		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
+		//メニュー欄切り替え用にアカウントの管理番号を取得
+		Integer loginNum = (Integer) request.getSession().getAttribute("loginNum");
+		request.setAttribute("loginNumber", loginNum);
 
 		//modal用のクエリパラメータを取得、リクエスト処理
 		if (request.getParameter("Modal") != null && request.getParameter("Modal").equals("permit")) {
@@ -29,7 +32,29 @@ public class ViewListServlet extends HttpServlet {
 
 		try {
 			RecordDao recorddao = DaoFactory.createRecordDao();
-			request.setAttribute("recordList", recorddao.findAll());
+			//クエリパラメータを取得
+			String loginNumber = request.getParameter("loginNumber");
+
+			Integer approval = null;
+			if (request.getParameter("approval") != null) {
+				approval = Integer.parseInt(request.getParameter("approval"));
+			}
+
+			System.out.println(approval);
+			//全ての記録：パラメータ（loginNumber）= null  
+			if (loginNumber == null) {
+				request.setAttribute("recordList", recorddao.findAll());
+
+				//未承認/差し戻し/承認済みの記録：パラメータ（loginNumber）!= null
+				//差し戻し・承認済みの記録
+			} else if (loginNumber != null && approval != null) {
+				request.setAttribute("recordList", recorddao.findAll(loginNum, approval));
+
+				//未承認の記録
+			} else if (loginNumber != null && approval == null) {
+				request.setAttribute("recordList", recorddao.findAll(loginNum));
+
+			}
 
 			request.getRequestDispatcher("/WEB-INF/view/viewlist.jsp")
 					.forward(request, response);
