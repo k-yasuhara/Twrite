@@ -17,4 +17,9 @@ public interface RecordDao {
 	//　レコード更新
 	void update(RecordDB record) throws Exception;
 	
+	//　レコード承認
+	void permit (Integer id) throws Exception;
+	
+	//　レコード差戻し
+	void remand (Integer id) throws Exception;
 }

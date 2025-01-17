@@ -73,7 +73,7 @@ public class RecordDaoImpl implements RecordDao {
 		Patient patient = new Patient(id, pAttribute);
 
 		RecordDB record = new RecordDB(id, registerId, null, null, start, end, null, consContent, respContent, null,
-				null, symptoms, staff, patient);
+				null,null, symptoms, staff, patient);
 
 		return record;
 	}
@@ -148,7 +148,7 @@ public class RecordDaoImpl implements RecordDao {
 		Integer staffId = (Integer) rs.getObject("staff_id");
 
 		RecordDB record = new RecordDB(id, registerId, null, null, start, end, patientP, consContent, respContent, 0,
-				staffId, null, null, null);
+				staffId, null ,null, null, null);
 
 		return record;
 	}
@@ -185,6 +185,36 @@ public class RecordDaoImpl implements RecordDao {
 				+ "staff_id=? "
 				+ "where id=?;";
 		return sql;
+	}
+
+	@Override
+	public void permit(Integer id) throws Exception {
+		try (var con = ds.getConnection();) {
+			String sql = "update records set "
+					   + "approval_status = 1 "
+					   + "where id = ?;";
+			var stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void remand(Integer id) throws Exception {
+		try (var con = ds.getConnection();) {
+			String sql = "update records set "
+					   + "approval_status = 2 "
+					   + "where id = ?;";
+			var stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+		
 	}
 
 }

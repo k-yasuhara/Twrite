@@ -122,7 +122,7 @@ public class EditServlet extends HttpServlet {
 			//バリデーションOK
 			//dtoにデータ格納
 			RecordDB record = new RecordDB(id, null, null, null, startAt, endAt, patientPattern, consContent,
-					respContent, null, staffId, null, null, null);
+					respContent, null, staffId, null ,null, null, null);
 
 			//recordsDBにデータ追加
 			RecordDao recordDao = DaoFactory.createRecordDao();

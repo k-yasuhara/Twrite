@@ -11,28 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import dao.DaoFactory;
 import dao.RecordDao;
 
-@WebServlet("/viewlist")
-public class ViewListServlet extends HttpServlet {
+@WebServlet("/remand")
+public class RemandServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//アカウント名表示
 		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
-
-		//modal用のクエリパラメータを取得、リクエスト処理
-		if (request.getParameter("Modal") != null && request.getParameter("Modal").equals("permit")) {
-			request.setAttribute("approvalMsg", "承認しました");
-		} else if (request.getParameter("Modal") != null && request.getParameter("Modal").equals("remand")) {
-			request.setAttribute("approvalMsg", "差し戻しました");
-		}
-
+		//クエリパラメータを取得
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		
 		try {
 			RecordDao recorddao = DaoFactory.createRecordDao();
-			request.setAttribute("recordList", recorddao.findAll());
-
-			request.getRequestDispatcher("/WEB-INF/view/viewlist.jsp")
-					.forward(request, response);
+			recorddao.remand(id);
+			
+			response.sendRedirect("viewlist?Modal=remand");
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
