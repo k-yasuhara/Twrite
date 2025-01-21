@@ -39,9 +39,8 @@ public class ViewListServlet extends HttpServlet {
 			if (request.getParameter("approval") != null) {
 				approval = Integer.parseInt(request.getParameter("approval"));
 			}
-
-			System.out.println(approval);
-			//全ての記録：パラメータ（loginNumber）= null  
+				
+				//全ての記録：パラメータ（loginNumber）= null  
 			if (loginNumber == null) {
 				request.setAttribute("recordList", recorddao.findAll());
 

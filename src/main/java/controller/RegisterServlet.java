@@ -57,7 +57,7 @@ public class RegisterServlet extends HttpServlet {
 			startAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(strStart);
 			endAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(strEnd);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new ServletException(e);
 		}
 
 		if (endAt.before(startAt)) {
