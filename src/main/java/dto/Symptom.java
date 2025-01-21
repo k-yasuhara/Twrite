@@ -11,4 +11,6 @@ public class Symptom {
 	private Integer id;
 	private Integer recordsId;
 	private Integer symptomsId;
+	private String  symptomsName;
+	private Integer countSymptom;
 }

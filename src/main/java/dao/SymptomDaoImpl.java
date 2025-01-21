@@ -69,10 +69,9 @@ public class SymptomDaoImpl implements SymptomDao {
 		Integer recordsId = (Integer) rs.getObject("records_id");
 		Integer symptomsId = (Integer) rs.getObject("symptoms_id");
 
-		return new Symptom(id, recordsId, symptomsId);
+		return new Symptom(id, recordsId, symptomsId, null, null);
 	}
 
-	
 	@Override
 	public void delete(Integer id) throws Exception {
 		try (var con = ds.getConnection();) {
@@ -83,6 +82,51 @@ public class SymptomDaoImpl implements SymptomDao {
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
+	}
+
+	@Override
+	public List<Symptom> countSymptom(int date) throws Exception {
+		List<Symptom> symptoms = new ArrayList<>();
+
+		try (var con = ds.getConnection();) {
+			String sql = countSymptomSQL(date);
+			var stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				symptoms.add(mapToCountSymptoms(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return symptoms;
+	}
+
+	private Symptom mapToCountSymptoms(ResultSet rs) throws SQLException {
+		String symptomName = rs.getString("symptoms_name");
+		int countSymptom = rs.getInt("count");
+		return new Symptom(null, null, null, symptomName, countSymptom);
+	}
+
+	private String countSymptomSQL(int date) {
+		String sql = "select symptoms_name, count(symptoms_id) as count "
+				+ "FROM symptoms "
+				+ "join symptoms_pattern on symptoms_id = symptoms_pattern.id "
+				+ "join records on records_id = records.id "
+				+ coutSmptomTodaySQL(date)
+				+ "group by symptoms_id "
+				+ "order by count(*) desc "
+				+ "limit 3 ;";
+		return sql;
+	}
+
+	private String coutSmptomTodaySQL(int date) {
+		String sql = new String();
+		if (date == 0) {
+			sql = "where date(start_at) = curdate() ";
+		} else if (date == -1) {
+			sql = "where date(start_at) = CURDATE() - INTERVAL 1 DAY ";
+		}
+		return sql;
 	}
 }

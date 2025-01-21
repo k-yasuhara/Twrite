@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -114,14 +114,14 @@
 						相談傾向
 						<div class="row">
 							<div class="col-6">
-								<p class="fs-3 m-2 text-start">1. 発熱</p>
-								<p class="fs-3 m-2 text-start">2. 咽頭痛</p>
-								<p class="fs-3 m-2 text-start">3. 咽頭違和感</p>
+								<c:forEach items="${countSymp}" var="c" varStatus="vs">
+									<p class="fs-3 m-2 text-start">${vs.count}. <c:out value="${c.symptomsName}" /></p>								
+								</c:forEach>
 							</div>
 							<div class="col-6">
-								<p class="fs-3 m-2 text-end">(412件/+32)</p>
-								<p class="fs-3 m-2 text-end">(181件/+20)</p>
-								<p class="fs-3 m-2 text-end">(120件+11)</p>
+							<c:forEach var="i" begin="0" end="${fn:length(countSymp)-1}" >
+								<p class="fs-3 m-2 text-end">(<c:out value="${c.countSymptom}" />件/${countSympYesterday[i].countSymptom-countSympToday[i].countSymptom})</p>							
+							</c:forEach>
 							</div>
 						</div>
 					</div>

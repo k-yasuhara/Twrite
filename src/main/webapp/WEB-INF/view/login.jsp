@@ -20,19 +20,25 @@
 		<!-- アラートメッセージ -->
 		<c:if test="${not empty errorMsg}">
 			<div class="alert alert-danger" role="alert">
-					ログインに失敗しました。<br>IDまたはパスワードを確認してください。
+				ログインに失敗しました。<br>IDまたはパスワードを確認してください。
 			</div>
-		</c:if>		
+		</c:if>
 		<!-- アラートメッセージ -->
 
 		<form action="" method="POST">
 			<div class="form-group">
-				<label for="login_id">ログインID</label> 
-				<input class="form-control" type="text" name="loginId"aria-label="default input example" value="<c:out value="${loginId}" />" required autofocus>
+				<label for="login_id">ログインID</label> <input class="form-control"
+					type="text" name="loginId" aria-label="default input example"
+					value="<c:out value="${loginId}" />" pattern="[a-zA-Z0-9]*"
+					title="半角英数字のみ入力してください"
+					oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')"
+					required
+					autofocus>
 			</div>
 			<div class="form-group">
-				<label for="password">パスワード</label>
-				<input class="form-control" type="password" name="loginPass" aria-label="default input example" required>
+				<label for="password">パスワード</label> <input class="form-control"
+					type="password" name="loginPass" aria-label="default input example"
+					required>
 			</div>
 			<button type="submit" class="login-btn">ログイン</button>
 		</form>

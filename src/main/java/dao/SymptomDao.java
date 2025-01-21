@@ -14,5 +14,8 @@ public interface SymptomDao {
 	
 	//レコード全削除
 	void delete(Integer symptom)throws Exception;
-
+	
+	//カウント（limit3）
+	List<Symptom> countSymptom(int date)throws Exception;
+	
 }
