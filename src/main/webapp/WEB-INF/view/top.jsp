@@ -1,15 +1,17 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twrite トップページ</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/top.style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/top.style.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 </head>
@@ -19,12 +21,13 @@
 		<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary border">
 			<div class="container-fluid">
 				<a class="navbar-brand" href=""> <img
-					src="<%= request.getContextPath() %>/images/Twriteshortlogo_transparent.png" alt="Logo" width="22"
-					height="24" class="d-inline-block align-text-top"> 〇〇救急相談センター
+					src="<%=request.getContextPath()%>/images/Twriteshortlogo_transparent.png"
+					alt="Logo" width="22" height="24"
+					class="d-inline-block align-text-top"> 〇〇救急相談センター
 				</a>
 				<ul class="nav justify-content-end">
-					<li class="nav-item"><a class="nav-link disabled"><c:out value="${loginName}" /></a>
-					</li>
+					<li class="nav-item"><a class="nav-link disabled"><c:out
+								value="${loginName}" /></a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="logout">ログアウト</a></li>
 				</ul>
@@ -66,21 +69,24 @@
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                             </svg> <span class="ms-2">全ての記録</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="viewlist?loginNumber=${loginNumber}"> <svg
+						<li class="nav-item"><a class="nav-link"
+							href="viewlist?loginNumber=${loginNumber}"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                             </svg> <span class="ms-2">未承認</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="viewlist?loginNumber=${loginNumber}&approval=1"> <svg
+						<li class="nav-item"><a class="nav-link"
+							href="viewlist?loginNumber=${loginNumber}&approval=1"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                             </svg> <span class="ms-2">差し戻し</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="viewlist?loginNumber=${loginNumber}&approval=2"> <svg
+						<li class="nav-item"><a class="nav-link"
+							href="viewlist?loginNumber=${loginNumber}&approval=2"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
@@ -103,7 +109,11 @@
 						style="background-color: #f4f4f4;">
 						本日の相談件数/前日比
 						<p class="fs-1 m-2 numberOfConsultations">
-							1203 <br>/+20
+							${cToday} 件<br>/
+							<c:if test="${(cToday - cYesterday)>0}">
+							+
+							</c:if>
+							${cToday - cYesterday}
 						</p>
 					</div>
 					<!-- 相談件数 -->
@@ -114,19 +124,31 @@
 						相談傾向
 						<div class="row">
 							<div class="col-6">
-								<c:forEach items="${countSymp}" var="c" varStatus="vs">
-									<p class="fs-3 m-2 text-start">${vs.count}. <c:out value="${c.symptomsName}" /></p>								
+								<c:forEach var="i" begin="0"
+									end="${fn:length(countSymptomToday)-1}">
+									<p class="fs-3 m-2 text-start">${i+1}.
+										<c:out value="${countSymptomToday[i].symptomsName}" />
+									</p>
 								</c:forEach>
 							</div>
 							<div class="col-6">
-							<c:forEach var="i" begin="0" end="${fn:length(countSymp)-1}" >
-								<p class="fs-3 m-2 text-end">(<c:out value="${c.countSymptom}" />件/${countSympYesterday[i].countSymptom-countSympToday[i].countSymptom})</p>							
-							</c:forEach>
+								<c:forEach var="i" begin="0"
+									end="${fn:length(countSymptomToday)-1}">
+									<p class="fs-3 m-2 text-end">
+										( ${countSymptomToday[i].countSymptom} 件/
+										<c:if
+											test="${(countSymptomToday[i].countSymptom - countSymptomYesterday[i].countSymptom) > 0}">
+										+
+										</c:if>
+										${countSymptomToday[i].countSymptom - countSymptomYesterday[i].countSymptom})
+									</p>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
 					<!-- 相談傾向 -->
 				</div>
+				
 				<div class="d-flex flex-row mb-3">
 					<div
 						class="p-2 m-2 text-center fs-4 p-3 fw-bold shadow border-end border-bottom"
@@ -149,17 +171,22 @@
 											datasets : [
 													{
 														label : '今週の相談件数',
-														data : [ 1200, 0, 0, 0,
-																0, 0, 0, 0 ],
+														data : [ 
+															<c:forEach items="${countRecordThisWeek}" var="thisWeek">
+															"${thisWeek}",
+															</c:forEach>
+															 ],
 														borderColor : "#ec4343",
 														backgroundColor : "#00000000"
 													},
 													{
 														label : '先週の相談件数',
-														data : [ 1052, 780,
-																650, 480, 680,
-																1500, 1823,
-																1489 ],
+														data : [ 
+															<c:forEach items="${countRecordLastWeek}" var="lastWeek">
+															"${lastWeek}",
+															</c:forEach>
+															
+															 ],
 														borderColor : "#2260ea",
 														backgroundColor : "#00000000"
 													} ],
@@ -176,7 +203,7 @@
 	<footer>
 		<p>&copy; 2024 Twrite. All rights reserved.</p>
 	</footer>
-	<script src="<%= request.getContextPath() %>/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

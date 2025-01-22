@@ -255,4 +255,58 @@ public class RecordDaoImpl implements RecordDao {
 
 	}
 
+	@Override
+	public List<RecordDB> findAll(int date) throws Exception {
+		List<RecordDB> recordList = new ArrayList<>();
+
+		try (var con = ds.getConnection();) {
+			String sql = findAllSQL() + countRecord(date);
+			var stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				recordList.add(mapToRecordViewList(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return recordList;
+	}
+
+	private String countRecord(int date) {
+		String sql = new String();
+		if (date == 0) {
+			sql = "where date(start_at) = curdate() group by r.id";
+		} else if (date == -1) {
+			sql = "where date(start_at) = CURDATE() - INTERVAL 1 DAY group by r.id";
+		}
+		return sql;
+	}
+
+	@Override
+	public List<RecordDB> findAllWeek(int date) throws Exception {
+		List<RecordDB> recordList = new ArrayList<>();
+
+		try (var con = ds.getConnection();) {
+			String sql = findAllSQL() + countRecordWeek(date);
+			var stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				recordList.add(mapToRecordViewList(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return recordList;
+	}
+
+	private String countRecordWeek(int date) {
+		String sql = new String();
+
+		sql = "where date(start_at) = "
+				+ " (SELECT CURDATE() - INTERVAL (WEEKDAY(CURDATE()) +"
+				+ date
+				+ ") DAY) group by r.id";
+		return sql;
+	}
+
 }

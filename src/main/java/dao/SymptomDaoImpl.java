@@ -113,14 +113,14 @@ public class SymptomDaoImpl implements SymptomDao {
 				+ "FROM symptoms "
 				+ "join symptoms_pattern on symptoms_id = symptoms_pattern.id "
 				+ "join records on records_id = records.id "
-				+ coutSmptomTodaySQL(date)
+				+ coutSmptomSQL(date)
 				+ "group by symptoms_id "
 				+ "order by count(*) desc "
 				+ "limit 3 ;";
 		return sql;
 	}
 
-	private String coutSmptomTodaySQL(int date) {
+	private String coutSmptomSQL(int date) {
 		String sql = new String();
 		if (date == 0) {
 			sql = "where date(start_at) = curdate() ";
