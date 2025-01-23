@@ -123,32 +123,41 @@
 						style="background-color: #f4f4f4; width: 500px;">
 						相談傾向
 						<div class="row">
-							<div class="col-6">
-								<c:forEach var="i" begin="0"
-									end="${fn:length(countSymptomToday)-1}">
-									<p class="fs-3 m-2 text-start">${i+1}.
-										<c:out value="${countSymptomToday[i].symptomsName}" />
+							<c:choose>
+								<c:when test="${empty countSymptomMsg}">
+									<div class="col-6">
+										<c:forEach var="i" begin="0"
+											end="${fn:length(countSymptomToday)-1}">
+											<p class="fs-3 m-2 text-start">${i+1}.
+												<c:out value="${countSymptomToday[i].symptomsName}" />
+											</p>
+										</c:forEach>
+									</div>
+									<div class="col-6">
+										<c:forEach var="i" begin="0"
+											end="${fn:length(countSymptomToday)-1}">
+											<p class="fs-3 m-2 text-end">
+												( ${countSymptomToday[i].countSymptom} 件/
+												<c:if
+													test="${(countSymptomToday[i].countSymptom - countSymptomYesterday[i].countSymptom) > 0}">
+												+
+												</c:if>
+												${countSymptomToday[i].countSymptom - countSymptomYesterday[i].countSymptom})
+											</p>
+										</c:forEach>
+									</div>
+								</c:when>
+								<c:when test="${not empty countSymptomMsg}">
+									<p>
+										<c:out value="${countSymptomMsg}" />
 									</p>
-								</c:forEach>
-							</div>
-							<div class="col-6">
-								<c:forEach var="i" begin="0"
-									end="${fn:length(countSymptomToday)-1}">
-									<p class="fs-3 m-2 text-end">
-										( ${countSymptomToday[i].countSymptom} 件/
-										<c:if
-											test="${(countSymptomToday[i].countSymptom - countSymptomYesterday[i].countSymptom) > 0}">
-										+
-										</c:if>
-										${countSymptomToday[i].countSymptom - countSymptomYesterday[i].countSymptom})
-									</p>
-								</c:forEach>
-							</div>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 					<!-- 相談傾向 -->
 				</div>
-				
+
 				<div class="d-flex flex-row mb-3">
 					<div
 						class="p-2 m-2 text-center fs-4 p-3 fw-bold shadow border-end border-bottom"

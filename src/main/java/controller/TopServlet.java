@@ -28,6 +28,16 @@ public class TopServlet extends HttpServlet {
 		try {
 			RecordDao reDao = DaoFactory.createRecordDao();
 			//今日を0、昨日を-1とする
+			//validation=NG
+			if (reDao.findAll(0).size() == 0) {
+				request.setAttribute("cToday", 0);
+			}
+
+			if (reDao.findAll(-1).size() == 0) {
+				request.setAttribute("cYesterday", 0);
+			}
+			
+			//validation=OK
 			request.setAttribute("cToday", reDao.findAll(0).size());
 			request.setAttribute("cYesterday", reDao.findAll(-1).size());
 		} catch (Exception e) {
@@ -38,6 +48,13 @@ public class TopServlet extends HttpServlet {
 		try {
 			SymptomDao sympDao = DaoFactory.creatSymptomDao();
 			//今日を0、昨日を-1とする
+			
+			//validation=NG
+			if(sympDao.countSymptom(0).size() == 0) {
+				request.setAttribute("countSymptomMsg","データがありません");
+			}
+			
+			//validation=OK
 			request.setAttribute("countSymptomToday", sympDao.countSymptom(0));
 			request.setAttribute("countSymptomYesterday", sympDao.countSymptom(-1));
 		} catch (Exception e) {
