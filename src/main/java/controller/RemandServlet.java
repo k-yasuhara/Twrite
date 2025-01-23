@@ -17,12 +17,11 @@ public class RemandServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//アカウント名表示
-		request.setAttribute("loginName", request.getSession().getAttribute("loginName"));
-		//クエリパラメータを取得
+		//クエリパラメータでレコード管理番号を取得
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		
 		try {
+			//recordsDBのapproval_statusを更新
 			RecordDao recorddao = DaoFactory.createRecordDao();
 			recorddao.remand(id);
 			

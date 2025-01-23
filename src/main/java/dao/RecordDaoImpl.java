@@ -62,9 +62,11 @@ public class RecordDaoImpl implements RecordDao {
 		List<RecordDB> recordList = new ArrayList<>();
 
 		try (var con = ds.getConnection();) {
-			String sql = findAllSQL() + " where r.register_id = ? group by r.id;";
+			String sql = findAllSQL() 
+					+ " where "
+					+ findAllSql(loginNum)
+					+ " r.approval_status is null group by r.id;";
 			var stmt = con.prepareStatement(sql);
-			stmt.setInt(1, loginNum);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				recordList.add(mapToRecordViewList(rs));
@@ -73,6 +75,16 @@ public class RecordDaoImpl implements RecordDao {
 			throw e;
 		}
 		return recordList;
+	}
+
+	private String findAllSql(Integer loginNum) {
+		String sql = new String();
+		if(loginNum == 2) {
+			return "";
+		}else {
+			sql = "r.register_id = 1 and ";
+		}
+		return sql;
 	}
 
 	@Override
@@ -184,9 +196,10 @@ public class RecordDaoImpl implements RecordDao {
 		String consContent = rs.getString("consultation");
 		String respContent = rs.getString("response");
 		Integer staffId = (Integer) rs.getObject("staff_id");
+		Integer approval = (Integer) rs.getObject("approval_status");
 
 		RecordDB record = new RecordDB(id, registerId, null, null, start, end, patientP, consContent, respContent, 0,
-				staffId, null, null, null, null);
+				staffId, approval, null, null, null);
 
 		return record;
 	}
