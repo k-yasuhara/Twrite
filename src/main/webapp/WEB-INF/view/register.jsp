@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -24,8 +24,8 @@
 					class="d-inline-block align-text-top"> 〇〇救急相談センター
 				</a>
 				<ul class="nav justify-content-end">
-					<li class="nav-item"><a class="nav-link disabled"><c:out value="${loginName}" /></a>
-					</li>
+					<li class="nav-item"><a class="nav-link disabled"><c:out
+								value="${loginName}" /></a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="logout">ログアウト</a></li>
 				</ul>
@@ -67,32 +67,83 @@
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                             </svg> <span class="ms-2">全ての記録</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="viewlist?loginNumber=${loginNumber}"> <svg
-									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						<li class="nav-item"><a class="nav-link" href="#"
+							onclick="submitForm()"> <script>
+								function submitForm() {
+									const form = document.createElement('form');
+									form.method = 'POST';
+									form.action = 'viewlist'; // 送信先URLを指定
+									form.style.display = 'none';
+
+									// クエリパラメータをhidden要素で追加
+									const params = {
+										loginNumber : ${loginNumber}
+									};
+
+									for ( const key in params) {
+										const input = document
+												.createElement('input');
+										input.type = 'hidden';
+										input.name = key;
+										input.value = params[key];
+										form.appendChild(input);
+									}
+
+									document.body.appendChild(form);
+									form.submit();
+								}
+							</script> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                             </svg> <span class="ms-2">未承認</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="viewlist?loginNumber=${loginNumber}&approval=1"> <svg
+						<li class="nav-item"><a class="nav-link" href="#"
+							onclick="submitFormApproval(2)"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                             </svg> <span class="ms-2">差し戻し</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="viewlist?loginNumber=${loginNumber}&approval=2"> <svg
+						<li class="nav-item"><a class="nav-link" href="#"
+							onclick="submitFormApproval(1)"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                 <path
 										d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                             </svg> <span class="ms-2">承認済み</span>
 						</a></li>
+						<script>
+								function submitFormApproval(i) {
+									const form = document.createElement('form');
+									form.method = 'POST';
+									form.action = 'viewlist'; // 送信先URLを指定
+									form.style.display = 'none';
+
+									// クエリパラメータをhidden要素で追加
+									const params = {
+										loginNumber : ${loginNumber},
+										approval : i
+									};
+
+									for ( const key in params) {
+										const input = document
+												.createElement('input');
+										input.type = 'hidden';
+										input.name = key;
+										input.value = params[key];
+										form.appendChild(input);
+									}
+
+									document.body.appendChild(form);
+									form.submit();
+								}
+						</script>
 					</ul>
 				</div>
 			</nav>
-			<!-- サイドバー -->
-
+			<!-- end of サイドバー -->
 			<!-- main -->
 			<main class="col-10 col-sm px-4 py-4">
 				<c:if test="${not empty errorMsg}">
@@ -142,16 +193,16 @@
 								<option value="3">松井</option>
 							</select>
 							<c:if test="${not empty staffId}">
-									<c:forEach var="i" begin="1" end="3">
-										<c:if test="${staffId == i}">
-											<script>
+								<c:forEach var="i" begin="1" end="3">
+									<c:if test="${staffId == i}">
+										<script>
 													var select = document
 															.getElementById("staff_id");
 													select.options[${i-1}].selected = true;
 												</script>
-										</c:if>
-									</c:forEach>
-								</c:if>
+									</c:if>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 					<!-- end of スタッフ名 -->
@@ -208,93 +259,83 @@
 						<div class="col-sm-auto form-check ms-3 py-2">
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="1"
-									name="symptoms" id="fever" 
+									name="symptoms" id="fever"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 1}">checked</c:if>
-									</c:forEach>
-									> <label for="fever"
-									class="form-check-label" >熱発</label>
+									</c:forEach>>
+								<label for="fever" class="form-check-label">熱発</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="2"
 									name="symptoms" id="cough"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 2}">checked</c:if>
-									</c:forEach>
-									> <label for="cough"
-									class="form-check-label">咳嗽</label>
+									</c:forEach>>
+								<label for="cough" class="form-check-label">咳嗽</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="3"
 									name="symptoms" id="stuffy_nose"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 3}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
+									</c:forEach>>
+								<label for="stuffy_nose" class="form-check-label">鼻汁・鼻閉</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="4"
 									name="symptoms" id="sore_throat"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 4}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="sore_throat" class="form-check-label">咽頭痛</label>
+									</c:forEach>>
+								<label for="sore_throat" class="form-check-label">咽頭痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="5"
 									name="symptoms" id="throat_discomform"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 5}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="throat_discomform" class="form-check-label">咽頭違和感</label>
+									</c:forEach>>
+								<label for="throat_discomform" class="form-check-label">咽頭違和感</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="6"
 									name="symptoms" id="stomachache"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 6}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="stomachache" class="form-check-label">腹痛</label>
+									</c:forEach>>
+								<label for="stomachache" class="form-check-label">腹痛</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="7"
 									name="symptoms" id="diarrhea"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 7}">checked</c:if>
-									</c:forEach>
-									> <label for="diarrhea"
-									class="form-check-label">下痢</label>
+									</c:forEach>>
+								<label for="diarrhea" class="form-check-label">下痢</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="8"
 									name="symptoms" id="nausea_vomiting"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 8}">checked</c:if>
-									</c:forEach>
-									> <label
-									for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
+									</c:forEach>>
+								<label for="nausea_vomiting" class="form-check-label">嘔気・嘔吐</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="9"
 									name="symptoms" id="burn"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 9}">checked</c:if>
-									</c:forEach>
-									> <label for="burn"
-									class="form-check-label">熱傷</label>
+									</c:forEach>>
+								<label for="burn" class="form-check-label">熱傷</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" value="10"
 									name="symptoms" id="bruise"
 									<c:forEach items="${selectedSymptoms}" var="s">
 										<c:if test="${s == 10}">checked</c:if>
-									</c:forEach>
-									> <label for="bruise"
-									class="form-check-label">打撲</label>
+									</c:forEach>>
+								<label for="bruise" class="form-check-label">打撲</label>
 							</div>
 						</div>
 					</div>
