@@ -170,7 +170,7 @@
 					<div
 						class="p-2 m-2 mx-5 text-center fs-4 p-3 fw-bold shadow border-end border-bottom "
 						style="background-color: #f4f4f4; width: 500px;">
-						相談傾向
+						相談傾向/前日比
 						<div class="row">
 							<c:choose>
 								<c:when test="${empty countSymptomMsg}">

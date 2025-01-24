@@ -168,7 +168,7 @@
 							<tr>
 								<th scope="row">
 									<table>
-										<c:if test="${title ne '全ての記録'}">
+										<c:if test="${title ne '全ての記録' && title ne '承認済み' }">
 
 											<td><a class="icon-link" href="edit?id=${r.id}"> <svg
 														xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -181,7 +181,7 @@
                                     		</svg>
 											</a></td>
 										</c:if>
-										<td><a class="icon-link" href="view?id=${r.id}"> <svg
+										<td><a class="icon-link" href="view?id=${r.id}&title=${title}"> <svg
 													xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 													fill="currentColor" class="bi bi-book-half"
 													viewBox="0 0 16 16">

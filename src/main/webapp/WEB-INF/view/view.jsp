@@ -416,7 +416,7 @@
 					<!-- end of backbutton  -->
 
 					<!-- editbutton  -->
-					<c:if test="${record.registerId eq loginNumber}">
+					<c:if test="${record.registerId eq loginNumber && record.approval ne 1 && istitle ne false }">
 						<div class="col-sm-auto">
 							<a href="edit?id=${record.id}">
 								<button type="submit" class="btn btn-warning ms-3 mb-3">編集</button>
@@ -427,7 +427,7 @@
 
 				<!-- permitButton trigger modal -->
 				<div class ="col-sm-auto">
-				<c:if test="${loginId eq 'sv01' && empty record.approval }">
+				<c:if test="${loginId eq 'sv01' && empty record.approval}">
 					<button type="button" class="btn btn-success ms-3 mb-3"
 						data-bs-toggle="modal" data-bs-target="#permitModal">承認</button>
 

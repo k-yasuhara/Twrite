@@ -30,6 +30,11 @@ public class ViewServlet extends HttpServlet {
 		try {
 			//クエリパラメータを取得
 			Integer id = Integer.parseInt(request.getParameter("id"));
+			boolean istitle = true;
+			if(request.getParameter("title").equals("承認済み") || request.getParameter("title").equals("全ての記録")) {
+				istitle = false;
+			}
+			request.setAttribute("istitle", istitle);
 
 			//クエリパラメータからrecordsDBのデータを取得、リクエストに格納
 			RecordDao reDao = DaoFactory.createRecordDao();
