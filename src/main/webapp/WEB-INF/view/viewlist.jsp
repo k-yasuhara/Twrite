@@ -147,63 +147,65 @@
 			<main class="col-10 col-sm px-4 py-4">
 				<!-- topic -->
 				<h1 class="h2 fw-bold">◆一覧画面｜${title}</h1>
-
-				<table class="table table-hover table-bordered">
-					<thead>
-						<tr>
-							<th scope="col" style="width: 100px;">編集/閲覧</th>
-							<th scope="col" style="width: 50px;">#</th>
-							<th scope="col" style="width: 250px;">相談開始時間</th>
-							<th scope="col" style="width: 250px;">相談終了時間</th>
-							<th scope="col" style="width: 100px;">対応者名</th>
-							<th scope="col" style="width: 125px;">急病者 続柄</th>
-							<th scope="col" style="width: 250px;">症状 種別</th>
-							<th scope="col" style="max-width: 250px;">相談内容</th>
-							<th scope="col" style="max-width: 250px;">対応内容</th>
-						</tr>
-					</thead>
-					<c:forEach items="${recordList}" var="r">
-
-						<tbody>
+				<div class="overflow-auto"
+					style="max-height: 700px; min-width: 850px; overflow: auto;">
+					<table class="table table-hover table-bordered">
+						<thead class="sticky-top table-secondary">
 							<tr>
-								<th scope="row">
-									<table>
-										<c:if test="${title ne '全ての記録' && title ne '承認済み' }">
-
-											<td><a class="icon-link" href="edit?id=${r.id}"> <svg
-														xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-														fill="currentColor" class="bi bi-pencil-square"
-														viewBox="0 0 16 16">
-                                        	<path
-															d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                        	<path fill-rule="evenodd"
-															d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                    		</svg>
-											</a></td>
-										</c:if>
-										<td><a class="icon-link" href="view?id=${r.id}&title=${title}"> <svg
-													xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-													fill="currentColor" class="bi bi-book-half"
-													viewBox="0 0 16 16">
-                                        <path
-														d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
-                                    </svg>
-										</a></td>
-									</table>
-								</th>
-								<th><c:out value="${r.id}" /></th>
-								<td><c:out value="${r.start}" /></td>
-								<td><c:out value="${r.end}" /></td>
-								<td><c:out value="${r.staff.name}" /></td>
-								<td><c:out value="${r.patient.attribute}" /></td>
-								<td><c:out value="${r.symptoms}" /></td>
-								<td><c:out value="${r.consContent}" /></td>
-								<td><c:out value="${r.respContent}" /></td>
+								<th scope="col" style="width: 100px;">編集/閲覧</th>
+								<th scope="col" style="width: 50px;">#</th>
+								<th scope="col" style="width: 250px;">相談開始時間</th>
+								<th scope="col" style="width: 250px;">相談終了時間</th>
+								<th scope="col" style="width: 100px;">対応者名</th>
+								<th scope="col" style="width: 125px;">急病者 続柄</th>
+								<th scope="col" style="width: 250px;">症状 種別</th>
+								<th scope="col" style="max-width: 250px;">相談内容</th>
+								<th scope="col" style="max-width: 250px;">対応内容</th>
 							</tr>
-						</tbody>
-					</c:forEach>
-				</table>
+						</thead>
+						<c:forEach items="${recordList}" var="r">
 
+							<tbody>
+								<tr>
+									<th scope="row">
+										<table>
+											<c:if test="${title ne '全ての記録' && title ne '承認済み' }">
+
+												<td><a class="icon-link" href="edit?id=${r.id}"> <svg
+															xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-pencil-square"
+															viewBox="0 0 16 16">
+                                        	<path
+																d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        	<path fill-rule="evenodd"
+																d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                    		</svg>
+												</a></td>
+											</c:if>
+											<td><a class="icon-link"
+												href="view?id=${r.id}&title=${title}"> <svg
+														xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-book-half"
+														viewBox="0 0 16 16">
+                                        <path
+															d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+                                    </svg>
+											</a></td>
+										</table>
+									</th>
+									<th><c:out value="${r.id}" /></th>
+									<td><c:out value="${r.start}" /></td>
+									<td><c:out value="${r.end}" /></td>
+									<td><c:out value="${r.staff.name}" /></td>
+									<td><c:out value="${r.patient.attribute}" /></td>
+									<td><c:out value="${r.symptoms}" /></td>
+									<td><c:out value="${r.consContent}" /></td>
+									<td><c:out value="${r.respContent}" /></td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
+				</div>
 			</main>
 			<!-- main -->
 			<!-- Modal -->
