@@ -336,4 +336,17 @@ public class RecordDaoImpl implements RecordDao {
 		return sql;
 	}
 
+	@Override
+	public void delete(Integer id) throws Exception {
+		try (var con = ds.getConnection();) {
+			String sql = "delete from records where id = ?;";
+			var stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+
 }

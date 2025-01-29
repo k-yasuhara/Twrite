@@ -33,10 +33,11 @@ public class ViewListServlet extends HttpServlet {
 				request.setAttribute("recordList", recorddao.findAll());
 				request.setAttribute("title", "全ての記録");
 			} else {
+				request.setAttribute("modalTitle","承認状況");
 				if (request.getParameter("Modal").equals("permit")) {
-					request.setAttribute("approvalMsg", "承認しました");
+					request.setAttribute("modalMsg", "承認しました");
 				} else if (request.getParameter("Modal").equals("remand")) {
-					request.setAttribute("approvalMsg", "差し戻しました");
+					request.setAttribute("modalMsg", "差し戻しました");
 				}
 				//opアカウントの場合opアカウントで作成したレコードのみ表示
 				request.setAttribute("recordList", recorddao.findAll(loginNum));

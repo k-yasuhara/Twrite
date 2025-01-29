@@ -34,4 +34,7 @@ public interface RecordDao {
 
 	//　レコード差戻し
 	void remand(Integer id) throws Exception;
+	
+	//　レコード削除
+	void delete(Integer id) throws Exception;
 }

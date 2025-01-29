@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twrite 一覧画面</title>
+<title>Twrite 閲覧画面</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -32,7 +32,7 @@
 			</div>
 		</nav>
 	</header>
-	<!-- ヘッダー -->
+	<!-- end of ヘッダー -->
 
 	<div class="container-fluid">
 		<div class="row">
@@ -158,114 +158,25 @@
 			<!-- main -->
 			<main class="col-10 col-sm px-4 py-4">
 				<!-- topic -->
-				<h1 class="h2 fw-bold">◆一覧画面｜${title}</h1>
-				<div class="overflow-auto"
-					style="max-height: 700px; min-width: 850px; overflow: auto;">
-					<table class="table table-hover table-bordered">
-						<thead class="sticky-top table-secondary">
-							<tr>
-								<th scope="col" style="width: 100px;">編集/閲覧</th>
-								<th scope="col" style="width: 50px;">#</th>
-								<th scope="col" style="width: 250px;">相談開始時間</th>
-								<th scope="col" style="width: 250px;">相談終了時間</th>
-								<th scope="col" style="width: 100px;">対応者名</th>
-								<th scope="col" style="width: 125px;">急病者 続柄</th>
-								<th scope="col" style="width: 250px;">症状 種別</th>
-								<th scope="col" style="max-width: 250px;">相談内容</th>
-								<th scope="col" style="max-width: 250px;">対応内容</th>
-							</tr>
-						</thead>
-						<c:forEach items="${recordList}" var="r">
+				<h1 class="h2 fw-bold">◆削除完了画面</h1>
+				<div class="alert alert-danger" role="alert">記録を削除しました</div>
 
-							<tbody>
-								<tr>
-									<th scope="row">
-										<table>
-											<c:if test="${title ne '全ての記録' && title ne '承認済み' }">
+				<div class="row">
+					<!-- backbutton  -->
+					<div class="col-sm-auto">
+						<a href="delete"><button type="button" class="btn btn-secondary ms-1 mb-3" >戻る</button></a>
+					</div>
+					<!-- end of backbutton  -->
 
-												<td><a class="icon-link" href="edit?id=${r.id}"> <svg
-															xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-															fill="currentColor" class="bi bi-pencil-square"
-															viewBox="0 0 16 16">
-                                        	<path
-																d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                        	<path fill-rule="evenodd"
-																d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                    		</svg>
-												</a></td>
-											</c:if>
-											<td><a class="icon-link"
-												href="view?id=${r.id}&title=${title}"> <svg
-														xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-														fill="currentColor" class="bi bi-book-half"
-														viewBox="0 0 16 16">
-                                        		<path
-															d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
-                                    			</svg>
-											</a></td>
-											<c:if test="${loginNumber eq 2 && title eq '削除'}">
-												<td><a class="icon-link" href="delete?id=${r.id}"> <svg
-															xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-															fill="currentColor" class="bi bi-x-square"
-															viewBox="0 0 16 16">
-  												<path
-																d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-  												<path
-																d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-												</svg>
-												</a></td>
-											</c:if>
-										</table>
-									</th>
-									<th><c:out value="${r.id}" /></th>
-									<td><fmt:formatDate value="${r.start}"
-											pattern="y年MM月dd日 HH時mm分" /></td>
-									<td><fmt:formatDate value="${r.end}"
-											pattern="y年MM月dd日 HH時mm分" /></td>
-									<td><c:out value="${r.staff.name}" /></td>
-									<td><c:out value="${r.patient.attribute}" /></td>
-									<td><c:out value="${r.symptoms}" /></td>
-									<td><c:out value="${r.consContent}" /></td>
-									<td><c:out value="${r.respContent}" /></td>
-								</tr>
-							</tbody>
-						</c:forEach>
-					</table>
 				</div>
+
 			</main>
 			<!-- main -->
-			<!-- Modal -->
-			<div class="modal fade" id="Modal" tabindex="-1"
-				aria-labelledby="ModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="ModalLabel">${modalTitle}</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">${modalMsg}</div>
-						<div class="modal-footer"></div>
-					</div>
-				</div>
-			</div>
-			<!-- end of Modal -->
 		</div>
 	</div>
-
-	<!-- fotter -->
 	<footer>
 		<p>&copy; 2024 Twrite. All rights reserved.</p>
 	</footer>
-	<!-- end of fotter -->
-
 	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-	<c:if test="${not empty modalMsg}">
-		<script>
-			const modal = new bootstrap.Modal(document.getElementById('Modal'));
-			modal.show(); // モーダルを表示
-		</script>
-	</c:if>
-
 </body>
 </html>
