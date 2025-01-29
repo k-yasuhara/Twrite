@@ -64,7 +64,7 @@ public class RecordDaoImpl implements RecordDao {
 		try (var con = ds.getConnection();) {
 			String sql = findAllSQL() 
 					+ " where "
-					+ findAllSql(loginNum)
+					+ findAllSQL(loginNum)
 					+ " r.approval_status is null group by r.id;";
 			var stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -77,7 +77,7 @@ public class RecordDaoImpl implements RecordDao {
 		return recordList;
 	}
 
-	private String findAllSql(Integer loginNum) {
+	private String findAllSQL(Integer loginNum) {
 		String sql = new String();
 		if(loginNum == 2) {
 			return "";
@@ -92,10 +92,14 @@ public class RecordDaoImpl implements RecordDao {
 		List<RecordDB> recordList = new ArrayList<>();
 
 		try (var con = ds.getConnection();) {
-			String sql = findAllSQL() + " where r.register_id = ? and r.approval_status = ? group by r.id;";
+			String sql = findAllSQL() 
+					   + "where "
+					   + findAllApproval(approval);
 			var stmt = con.prepareStatement(sql);
-			stmt.setInt(1, loginNum);
-			stmt.setInt(2, approval);
+			if(approval == 2) {
+				stmt.setInt(1, loginNum);				
+			}
+			
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				recordList.add(mapToRecordViewList(rs));
@@ -104,6 +108,16 @@ public class RecordDaoImpl implements RecordDao {
 			throw e;
 		}
 		return recordList;
+	}
+
+	private String findAllApproval(Integer approval) {
+		String sql = new String();
+		if(approval == 1) {
+			sql = " r.approval_status = 1 group by r.id;";
+		}else if(approval == 2) {
+			sql = " r.register_id = ? and r.approval_status = 2 group by r.id;";
+		}
+		return sql;
 	}
 
 	private RecordDB mapToRecordViewList(ResultSet rs) throws Exception {
