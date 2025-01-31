@@ -29,17 +29,17 @@ public class TopServlet extends HttpServlet {
 			RecordDao reDao = DaoFactory.createRecordDao();
 			//今日を0、昨日を-1とする
 			//validation=NG
-			if (reDao.findAll(0).size() == 0) {
+			if (reDao.findAllcount(0).size() == 0) {
 				request.setAttribute("cToday", 0);
 			}
 
-			if (reDao.findAll(-1).size() == 0) {
+			if (reDao.findAllcount(-1).size() == 0) {
 				request.setAttribute("cYesterday", 0);
 			}
 			
 			//validation=OK
-			request.setAttribute("cToday", reDao.findAll(0).size());
-			request.setAttribute("cYesterday", reDao.findAll(-1).size());
+			request.setAttribute("cToday", reDao.findAllcount(0).size());
+			request.setAttribute("cYesterday", reDao.findAllcount(-1).size());
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

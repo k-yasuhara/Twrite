@@ -197,7 +197,7 @@
 							<select class="form-select" name="staff_id" id="staff_id"
 								required>
 								<c:if test="${empty staffId}">
-									<option selected disabled>選択してください</option>
+									<option value="" selected disabled>選択してください</option>
 								</c:if>
 								<option value="1">渡邊</option>
 								<option value="2">高比良</option>

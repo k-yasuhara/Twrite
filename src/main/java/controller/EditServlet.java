@@ -70,7 +70,7 @@ public class EditServlet extends HttpServlet {
 
 		//DB:records用の入力値の取得
 		//クエリパラメータを取得
-		Integer id = Integer.parseInt(request.getParameter("id"));
+		Integer id = Integer.parseInt(request.getParameter("recordId"));
 
 		//formの入力内容を取得
 		String strStart = request.getParameter("start_at");
@@ -95,6 +95,7 @@ public class EditServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		System.out.println(endAt);
 		if (endAt.before(startAt)) {
 			request.setAttribute("errorMsg", "※相談終了時間の修正：　相談開始時間よりも後の日時を入力してください※");
 			isValid = false;
@@ -117,7 +118,7 @@ public class EditServlet extends HttpServlet {
 					request.setAttribute("selectedSymptoms", Arrays.asList(selectedSymptoms));
 				}
 
-				request.getRequestDispatcher("/WEB-INF/view/register.jsp")
+				request.getRequestDispatcher("/WEB-INF/view/edit.jsp")
 						.forward(request, response);
 				return;
 			}

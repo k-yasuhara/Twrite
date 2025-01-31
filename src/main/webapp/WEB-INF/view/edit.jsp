@@ -170,8 +170,8 @@
 						</div>
 						<!-- end of label枠 -->
 						<div class="col-sm-auto ms-3 py-2">
-							<input type="number" class="form-control " id="start_at"
-								style="width: 100px;" name="start_at" value="${record.id}"
+							<input type="number" class="form-control " id="recordId"
+								style="width: 100px;" name="recordId" value="${record.id}"
 								readonly>
 						</div>
 					</div>

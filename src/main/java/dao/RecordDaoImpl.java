@@ -283,7 +283,7 @@ public class RecordDaoImpl implements RecordDao {
 	}
 
 	@Override
-	public List<RecordDB> findAll(int date) throws Exception {
+	public List<RecordDB> findAllcount(int date) throws Exception {
 		List<RecordDB> recordList = new ArrayList<>();
 
 		try (var con = ds.getConnection();) {

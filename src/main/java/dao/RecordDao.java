@@ -15,7 +15,7 @@ public interface RecordDao {
 	List<RecordDB> findAll(Integer loginNum, Integer approval) throws Exception;
 
 	//　今日・昨日分のレコードを全取得->toppage相談件数
-	List<RecordDB> findAll(int date) throws Exception;
+	List<RecordDB> findAllcount(int date) throws Exception;
 
 	//　先週今週のレコードを全取得->toppage相談件数グラフ
 	List<RecordDB> findAllWeek(int date) throws Exception;

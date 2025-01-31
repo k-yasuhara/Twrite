@@ -55,7 +55,9 @@ public class RegisterServlet extends HttpServlet {
 		Date endAt = null;
 		try {
 			startAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(strStart);
+			System.out.println(startAt);
 			endAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(strEnd);
+			System.out.println(endAt);
 		} catch (ParseException e) {
 			throw new ServletException(e);
 		}
@@ -103,11 +105,13 @@ public class RegisterServlet extends HttpServlet {
 			String[] strSymptomList = request.getParameterValues("symptoms");
 
 			//入力ありの場合
+			SymptomDao symptomDao = DaoFactory.creatSymptomDao();
 			if (strSymptomList != null) {
 				//insertしたレコードの管理番号をもとにsymptomsDBにデータを格納
-				SymptomDao symptomDao = DaoFactory.creatSymptomDao();
 				symptomDao.insert(recordsId, strSymptomList);
-
+			} else {
+				String options []= {"0"};
+				symptomDao.insert(recordsId, options);
 			}
 
 			//topにリダイレクト
